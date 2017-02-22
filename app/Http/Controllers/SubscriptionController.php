@@ -9,6 +9,7 @@ use Auth;
 
 class SubscriptionController extends Controller
 {
+
     /**
     * Display a listing of the resource.
     *
@@ -16,16 +17,8 @@ class SubscriptionController extends Controller
     */
     public function index()
     {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-
-        if (Auth::user()->customer_id) {
-            $subscriptions = \Stripe\Subscription::all(array('customer'=> Auth::user()->customer_id));
-        } else {
-            $subscriptions = array();
-        }
-
         $data = [
-            'subscriptions' => $subscriptions,
+            'user' => Auth::user(),
         ];
 
         return view('subscription.index', $data);
@@ -105,9 +98,18 @@ class SubscriptionController extends Controller
             $subscription = \Stripe\Subscription::create(array(
                 "customer" => $customer->id,
                 "plan" => $celebrity->plan,
-                "application_fee_percent" => 15,
+                "application_fee_percent" => config('plans.application_fee_percent'),
             ), array("stripe_account" => $celebrity->account_id));
 
+            $sub = new Subscription;
+            $sub->follower_id = $follower->id;
+            $sub->following_id = $celebrity->id;
+
+            $sub->customer_id = $customer->id;
+            $sub->subscription_id = $subscription->id;
+            $sub->plan = $celebrity->plan;
+            $sub->application_fee_percent = config('plans.application_fee_percent');
+            $sub->save();
 
             return redirect('https://www.instagram.com/' . $nickname . '/');
 
@@ -128,6 +130,8 @@ class SubscriptionController extends Controller
     */
     public function show($nickname)
     {
+        if(Auth::check()) return redirect()->route('subscriptions.create', $nickname);
+
         $user = User::where('nickname', $nickname)->first();
 
         if (!$user) abort(404);
@@ -181,8 +185,28 @@ class SubscriptionController extends Controller
     * @param  \App\Subscription  $subscription
     * @return \Illuminate\Http\Response
     */
-    public function destroy(Subscription $subscription)
+    public function destroy($id)
     {
-        //
+        $subscription = Subscription::find($id);
+
+        if (!$subscription) return back()->with('error', 'Account not found.');
+
+        $celebrity = User::find($subscription->following_id);
+
+        if (!$celebrity) {
+          $subscription->delete();
+          return back()->with('error', 'Account not found.');
+        }
+
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+        $sub = \Stripe\Subscription::retrieve($subscription->subscription_id
+          , array("stripe_account" => $celebrity->account_id));;
+        $sub->cancel();
+
+        $subscription->delete();
+
+        return back()->with('positive', 'Following cancelled.');
+
     }
 }

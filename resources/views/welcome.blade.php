@@ -69,10 +69,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Monetize your Premium Instagram Account
+                    Earn money with Instagram
                 </div>
                 <div class="">
-                    Automatically accept followers who pay you a monthly subscription
+                    Monetize your premium Instagram account.
                 </div>
                 <div class="links">
                     @if (Auth::check())
@@ -81,6 +81,11 @@
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
                     @endif
+                </div>
+
+
+                <div style="text-align:center; margin-top:40px" class="ui grey">
+                    <small>Copyright Wuupy 2017</small>
                 </div>
             </div>
         </div>

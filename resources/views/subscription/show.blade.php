@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="extra content">
-      @if($user->plan)
+      @if($user->plan && $user->account_id)
         <a class="ui button primary" href="{{ route('subscriptions.create', $user->nickname)}}">@include('subscription.follow')</a>
       @else
         <div>Following {{ $user->nickname }} is not available</div>

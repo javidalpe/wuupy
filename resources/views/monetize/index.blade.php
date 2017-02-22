@@ -2,8 +2,8 @@
 
 @section('content')
 
-  <strong>1. Select your premium account monthly subscription pricing</strong>
-  <small>Users must pay this monthly subscription in order to follow you.</small>
+  <strong>1. Select your monthly following cost</strong>
+  <small>Users will pay this monthly subscription in order to follow you.</small>
   <div class="ui segment">
     @include('monetize.plan')
   </div>
@@ -15,7 +15,7 @@
   </div>
 
   <strong>3. Set your Instagram account private</strong>
-  <small>This prevent from free followers.</small>
+  <small>This prevents from free followers.</small>
   <div class="ui segment">
     <img src="/img/private.jpg" alt="" style="max-height:60px">
   </div>
@@ -44,7 +44,15 @@
 
 
   <strong>Current subscribers</strong>
-  <div class="ui segment">
-    0 subscribers
+  <div class="ui segments raised">
+    @forelse ($user->followers()->get() as $follower)
+      <div class="ui segment">
+        {{ $follower->nickname }} ${{ config('plans.'. $follower->pivot->plan)/100 }}/month {{ $follower->pivot->created_at }}
+      </div>
+    @empty
+      <div class="ui segment">
+        0 subscribers
+      </div>
+    @endforelse
   </div>
 @endsection

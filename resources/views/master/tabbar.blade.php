@@ -5,7 +5,7 @@
       <img src="{{ Auth::user()->avatar }}">
     </div>
       <a  href="/home" class="item">{{ Auth::user()->name }}</a>
-      <a class="item">Subscriptions</a>
+      <a  href="/follow" class="item">Following</a>
     </div>
   </div>
 @endif

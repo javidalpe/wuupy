@@ -14,12 +14,17 @@ class MonetizeController extends Controller
    */
   public function index()
   {
+      $user = Auth::user();
       $account = null;
-      if (Auth::user()->account_id) {
+      if ($user->account_id) {
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
-        $account = \Stripe\Account::retrieve(Auth::user()->account_id);
+        $account = \Stripe\Account::retrieve($user->account_id);
       }
-      return view('monetize.index', ['account' => $account]);
+      $data = [
+        'user' => $user,
+        'account' => $account
+      ];
+      return view('monetize.index', $data);
   }
 }

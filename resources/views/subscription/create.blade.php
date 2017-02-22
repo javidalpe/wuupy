@@ -13,22 +13,29 @@
     </div>
     <div class="extra content">
       @if($user->plan)
-        <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
-          {{ csrf_field() }}
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="{{ config('services.stripe.key') }}"
-          data-amount="{{config('plans.' . $user->plan)}}"
-          data-name="Follow {{ $user->nickname }}"
-          data-description="Monthly subscription"
-          data-email="{{ $user->email }}"
-          data-image="{{ $user->avatar }}"
-          data-locale="auto"
-          data-zip-code="false"
-          data-label="Follow: pay with Card"
-          data-allow-remember-me="false">
-        </script>
-      </form>
+        @if(Auth::user()->customer_id)
+          <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
+            {{ csrf_field() }}
+            <input type="submit" name="" value="@include('subscription.follow')" class="ui button primary">
+          </form>
+        @else
+          <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
+            {{ csrf_field() }}
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ config('services.stripe.key') }}"
+            data-amount="{{config('plans.' . $user->plan)}}"
+            data-name="Follow {{ $user->nickname }}"
+            data-description="Monthly subscription"
+            data-email="{{ $user->email }}"
+            data-image="{{ $user->avatar }}"
+            data-locale="auto"
+            data-zip-code="false"
+            data-label="@include('subscription.follow')"
+            data-allow-remember-me="false">
+          </script>
+        </form>
+      @endif
       @else
         <div>Following {{ $user->nickname }} is not available</div>
       @endif

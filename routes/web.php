@@ -35,7 +35,8 @@ Route::get('/register', 'Auth\LoginController@redirectToProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 //Subscriptions
-Route::get('/following', 'SubscriptionController@index')->name('subscriptions.index');
+Route::get('/follow', 'SubscriptionController@index')->name('subscriptions.index');
+Route::delete('/follow/{id}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
 Route::get('/{nickname}', 'SubscriptionController@show')->name('subscriptions.show');
 Route::get('/follow/{nickname}', 'SubscriptionController@create')->name('subscriptions.create');
 Route::post('/follow/{nickname}', 'SubscriptionController@store')->name('subscriptions.store');
