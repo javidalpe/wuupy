@@ -92,6 +92,9 @@ class AccountController extends Controller
                 \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
                 $account = \Stripe\Account::retrieve($user->account_id);
+
+                if (count($account['verification']['fields_needed']) <= 0)
+                    return redirect('/home');
             }
 
             $data = [

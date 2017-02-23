@@ -72,6 +72,7 @@ class SubscriptionController extends Controller
 
         $follower = Auth::user();
 
+        if ($follower->id == $celebrity->id) return back()->with('error', "Wtf?! You can't follow yourself!");
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         try {

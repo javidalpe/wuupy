@@ -28,9 +28,9 @@
             @if($user->plan)
                 @if(Auth::check())
                     @if(Auth::user()->customer_id)
-                        <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
+                        <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST" class="ui bottom attached button primary">
                             {{ csrf_field() }}
-                            <input type="submit" name="" value="@include('subscription.follow')" class="ui bottom attached button primary loading">
+                            <button type="submit" class="ui button primary onloading">@include('subscription.follow')</button>
                         </form>
                     @else
                         <div class="extra content">

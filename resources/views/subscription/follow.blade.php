@@ -6,4 +6,6 @@
   Follow for $9.99/month
 @elseif($user->plan == 'twenty')
   Follow for $19.99/month
+@else
+    Error
 @endif
