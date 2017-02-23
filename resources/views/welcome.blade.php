@@ -69,10 +69,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Earn money with Instagram
+                    Manage your Instagram private account
                 </div>
                 <div class="">
-                    Monetize your premium Instagram account.
+                    Use challenges to accept new followers.
                 </div>
                 <div class="links">
                     @if (Auth::check())
