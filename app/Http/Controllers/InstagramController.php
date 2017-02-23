@@ -23,9 +23,9 @@ class InstagramController extends Controller
         $user->save();
 
         if (!$private) {
-            return back()->with("error", "Your account is still publicly reachable.");
+            return redirect("/home#3")->with("error", "Your account is still publicly reachable.");
         }
-        return back();
+        return redirect("/home#3");
     }
 
     public static function isAccountPrivate($user)

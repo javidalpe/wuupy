@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <strong>1. Select your monthly following cost</strong>
+    <strong id="1">1. Select your monthly following cost</strong>
     <small>Users will pay this monthly subscription in order to follow you.</small>
     @if($user->plan)
         @include('master.components.done')
@@ -11,7 +11,7 @@
         @include('monetize.plan')
     </div>
 
-    <strong>2. Setup your bank account</strong>
+    <strong id="2">2. Setup your bank account</strong>
     <small>Where you will recieve funds</small>
     @if($account && $account['transfers_enabled'])
         @include('master.components.done')
@@ -26,10 +26,10 @@
             @include('monetize.followers')
         </div>
         @endif
-        
+
     </div>
 
-    <strong>3. Set your Instagram account private</strong>
+    <strong id="3">3. Set your Instagram account private</strong>
     <small>This prevents from free followers.</small>
     @if($user->private_checked)
         @include('master.components.done')
@@ -38,13 +38,13 @@
         @include('monetize.private')
     </div>
 
-    <strong>4. Share your subscriber link</strong>
+    <strong id="4">4. Share your subscriber link</strong>
     <small>This link allow people to pay and follow you.</small>
     <div class="ui segment">
         @include('monetize.copy')
     </div>
 
-    <strong>5. That's all!</strong>
+    <strong id="5">5. That's all!</strong>
     <small>Sit and relax.</small>
     <div class="ui segment">
         We will manage your followers for you.

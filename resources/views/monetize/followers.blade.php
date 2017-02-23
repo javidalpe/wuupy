@@ -1,5 +1,5 @@
 @if ($user->followers()->count() > 0)
-<table class="ui table">
+<table class="ui table unstackable">
   <thead>
     <tr><th>Account</th>
     <th>Following cost</th>

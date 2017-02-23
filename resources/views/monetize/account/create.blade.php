@@ -52,11 +52,11 @@
             <label>Last name</label>
             <input type="text" name="last_name"  required placeholder='Last'>
         </div>
-        <div class="one wide field required">
+        <div class="two wide field required">
             <label>Day</label>
             <input type="text" name="day" required placeholder='DD'>
         </div>
-        <div class="one wide field required">
+        <div class="two wide field required">
             <label>Month</label>
             <input type="text" name="month"  required placeholder='MM'>
         </div>
@@ -85,13 +85,14 @@
                         provide {{ config('app.name') }} accurate and complete information about
                         you and your business, and you authorize {{ config('app.name') }} to share
                         it and transaction information related to your use of the payment
-                        processing services provided by Stripe.</p>
-                    </div>
+                        processing services provided by Stripe.
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <div class="ui field">
-                @include('master.components.submit',['class' => 'blue small', 'label' => 'Activate account'])
-            </div>
+        <div class="ui field">
+            @include('master.components.submit',['class' => 'blue small', 'label' => 'Activate account'])
+        </div>
 
-        </form>
+    </form>

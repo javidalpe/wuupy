@@ -1,4 +1,4 @@
-<div data-tooltip="Find it at Profile -> Options -> Account">
+<div data-tooltip="Find it at Profile -> Options -> Account" style="overflow:hidden">
 
 <form class="ui form" action={{ route('instagram.check')}} method="post">
     {{ csrf_field() }}

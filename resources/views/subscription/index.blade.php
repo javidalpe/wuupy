@@ -9,7 +9,7 @@
   @else
     <strong>You are currently following</strong>
 
-    <table class="ui table">
+    <table class="ui table unstackable">
       <thead>
         <tr><th>Account</th>
         <th>Following cost</th>

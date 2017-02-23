@@ -74,7 +74,7 @@ class AccountController extends Controller
                 $user->account_id = $account_id;
                 $user->save();
 
-                return redirect('/home');
+                return redirect('/home#2');
 
             } catch (\Stripe\Error\Base $e) {
                 return back()->with('error', $e->getMessage());
