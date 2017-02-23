@@ -2,25 +2,27 @@
 <form class="ui form" action={{ route('account.store')}} method="post">
     {{ csrf_field() }}
 
-    <div class="two fields">
-        <div class="grouped fields">
-            <label>Account type</label>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="type" value="individual" required>
-                    <label>Individual</label>
+    <div class="fields">
+        <div class="five wide field required">
+            <label>Your account type</label>
+            <div class="grouped fields">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="type" value="individual" required>
+                        <label>Individual/Sole proprietorship</label>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="type" value="company">
-                    <label>Company</label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="type" value="company">
+                        <label>Corporation</label>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="field">
-            <label>Country</label>
+        <div class="five wide field required">
+            <label>Where are you based?</label>
             <small>Where the account representative lives or the business is legally established.</small>
             <select name="country" class="ui search dropdown">
                 <option value="US">United States</option>
@@ -40,34 +42,34 @@
         </div>
     </div>
 
-    <h5>Name and birthday</h5>
+    <h5>Legal name and Date of birth</h5>
     <div class="fields">
-        <div class="four wide field">
+        <div class="four wide field required ">
             <label>First name</label>
-            <input type="text" name="first_name" required placeholder='Justin'>
+            <input type="text" name="first_name" required placeholder='First'>
         </div>
-        <div class="four wide field">
+        <div class="four wide field required">
             <label>Last name</label>
-            <input type="text" name="last_name"  required placeholder='Biber'>
+            <input type="text" name="last_name"  required placeholder='Last'>
         </div>
-        <div class="one wide field">
+        <div class="one wide field required">
             <label>Day</label>
-            <input type="text" name="day" required placeholder='01'>
+            <input type="text" name="day" required placeholder='DD'>
         </div>
-        <div class="one wide field">
+        <div class="one wide field required">
             <label>Month</label>
-            <input type="text" name="month"  required placeholder='03'>
+            <input type="text" name="month"  required placeholder='MM'>
         </div>
-        <div class="two wide field">
+        <div class="two wide field required">
             <label>Year</label>
-            <input type="text" name="year"  required placeholder='1994'>
+            <input type="text" name="year"  required placeholder='YYYY'>
         </div>
     </div>
 
     <div class="ui field">
         <div class="ui accordion">
             <div class="title">
-                <label>By clicking set you accept the <a href="#">Terms of Service</a></label>
+                <label>By activating your account, you agree to our <a href="#">Terms of Service</a></label>
             </div>
             <div class="content">
                 <p>Payment processing services for premium accounts on {{ config('app.name') }} are provided by Stripe and are
@@ -89,7 +91,7 @@
             </div>
 
             <div class="ui field">
-                @include('master.components.submit',['class' => 'blue small', 'label' => 'Next'])
+                @include('master.components.submit',['class' => 'blue small', 'label' => 'Activate account'])
             </div>
 
         </form>
