@@ -25,12 +25,11 @@ class MonetizeController extends Controller
 
             try {
                 $account = \Stripe\Account::retrieve($user->account_id);
-                $transfers = \Stripe\Transfer::all(array("limit" => 15))->data;
-
+                $transfers = \Stripe\Transfer::all(array(), array("stripe_account" => $user->account_id))->data;
             } catch (\Stripe\Error\Base $e) {
 
-                $user->account_id = null;
-                $user->save();
+                //$user->account_id = null;
+                //$user->save();
 
                 return back()->with('error', $e->getMessage());
             } catch (Exception $e) {

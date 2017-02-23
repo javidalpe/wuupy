@@ -16,13 +16,13 @@
         <div class="field">
             <div class="ui radio checkbox">
                 <input type="radio" name="plan" value="ten" {{ Auth::user()->plan == "ten" ? 'checked' : '' }}>
-                <label>$9,99/month</label>
+                <label>$9.99/month</label>
             </div>
         </div>
         <div class="field">
             <div class="ui radio checkbox">
                 <input type="radio" name="plan" value="twenty" {{ Auth::user()->plan == "twenty" ? 'checked' : '' }}>
-                <label>$19,99/month</label>
+                <label>$19.99/month</label>
             </div>
         </div>
         <div class="field">

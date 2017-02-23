@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
+use \GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -72,10 +73,11 @@ class SubscriptionController extends Controller
         $follower = Auth::user();
 
 
-        InstagramController::follow($follower, $celebrity);
-
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         try {
+
+            InstagramController::follow($follower, $celebrity);
+
             if (!$follower->customer_id) {
                 $customer = \Stripe\Customer::create(array(
                     "description" => $follower->nickname,
@@ -118,13 +120,14 @@ class SubscriptionController extends Controller
             $sub->application_fee_percent = config('plans.application_fee_percent');
             $sub->save();
 
-
             return redirect('https://www.instagram.com/' . $nickname . '/');
-
 
         } catch (\Stripe\Error\Base $e) {
             InstagramController::unfollow($follower, $celebrity);
             return back()->with('error', $e->getMessage());
+        } catch(RequestException  $e) {
+
+            return back()->with('error', "There was an error following " . $nickname . ". Are you already following " . $nickname . "?");
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
