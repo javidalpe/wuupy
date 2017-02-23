@@ -1,0 +1,143 @@
+html {
+	background-color: #fff;
+}
+body{
+	width: 666px;
+	display: block;
+	margin: 0 auto;
+	background-image: url(/img/dataphone.png);
+	background-repeat: no-repeat;
+	background-size: 119%;
+	background-position-x: -60px;
+	background-position-y: 36px;
+	height: 843px;
+	padding-top: 170px;
+}
+iframe{
+    width: 232px;
+    display: block;
+    margin: 0 auto;
+    height: 259px;
+    box-sizing: border-box;
+    border: 0px;
+    overflow: hidden;
+}
+header, main{
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+}
+h1{
+	font-size: 1.4rem;
+}
+h1.acepted{
+	color:#fff;
+	background-color: #21BA45;
+	border:1px solid #21BA45;
+	border-radius: 5px;
+	text-align: center;
+	margin: 20px 0px;
+	padding: 7px;
+}
+form, input{
+	width: 100%;text-align: center;
+}
+div#download-ine {
+	margin: 20px 0;
+}
+button.ui.primary.button{
+	margin: 20px auto;display: block;
+}
+.button {
+   height: 50px;
+   width: 56px;
+   margin-left: 15px;
+}
+.full-height {
+    height: 100vh;
+}
+.flex{
+	display: flex;
+	width: 227px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	border: 0px;
+	padding-top: 216px;
+}
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+.content {
+    text-align: center;
+}
+.title {
+    font-size: 84px;
+}
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.m-b-md {
+    margin-bottom: 30px;
+}
+.logo{
+	width: auto;
+	display: block;
+	margin: 15px auto;
+}
+.section-ppal{
+	display: block;	
+	width: 60%;
+	margin: 20% auto;
+}
+.ui.progress{
+	border-radius: 0;width: 89%;margin: 0 auto!important;
+}
+.ui.active.progress .bar.uno {
+    width: 33.3%;
+    border-radius: 0;
+}
+.ui.active.progress .bar.dos {
+    width: 66.6%;
+    border-radius: 0;
+}
+.ui.active.progress .bar.tres {
+    width: 99.99%;
+    border-radius: 0;
+}
+.ui.animated.button {
+    float: right;
+    margin: 20px 0px;
+}
+.ui.input.focus{
+	width: 100%;
+}
+.ui.input input{
+	text-align: center;margin: 20px auto;
+}
+.ui.input input:-webkit-autofill{
+	-webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+.checkbox-terms-conditions{
+	width: auto;
+}
+
+::-webkit-input-placeholder {text-align: center;}
+:-moz-placeholder {/* Firefox 18- */text-align: center;}
+::-moz-placeholder {/* Firefox 19+ */text-align: center;}
+:-ms-input-placeholder {text-align: center;}

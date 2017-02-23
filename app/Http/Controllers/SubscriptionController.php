@@ -44,10 +44,14 @@ class SubscriptionController extends Controller
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         $account = \Stripe\Account::retrieve($user->account_id);
+        $following = Auth::user()->following()->find($user->id);
+        $isPublic = !InstagramController::isAccountPrivate($user);
 
         $data = [
             'user' => $user,
             'account' => $account,
+            'following' => $following,
+            'public' => $isPublic,
         ];
 
         return view('subscription.create', $data);
@@ -66,6 +70,9 @@ class SubscriptionController extends Controller
         if (!$celebrity) abort(404);
 
         $follower = Auth::user();
+
+
+        InstagramController::follow($follower, $celebrity);
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         try {
@@ -111,10 +118,12 @@ class SubscriptionController extends Controller
             $sub->application_fee_percent = config('plans.application_fee_percent');
             $sub->save();
 
+
             return redirect('https://www.instagram.com/' . $nickname . '/');
 
 
         } catch (\Stripe\Error\Base $e) {
+            InstagramController::unfollow($follower, $celebrity);
             return back()->with('error', $e->getMessage());
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -192,6 +201,8 @@ class SubscriptionController extends Controller
         if (!$subscription) return back()->with('error', 'Account not found.');
 
         $celebrity = User::find($subscription->following_id);
+
+        InstagramController::unfollow(Auth::user(), $celebrity);
 
         if (!$celebrity) {
           $subscription->delete();

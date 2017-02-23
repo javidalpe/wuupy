@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use \GuzzleHttp\Exception\RequestException;
 use Socialite;
 use App\User;
 use Auth;
@@ -16,7 +17,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('instagram')->redirect();
+        return Socialite::driver('instagram')->scopes(['public_content', 'relationships'])->redirect();
     }
 
     /**
@@ -26,7 +27,16 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $instagramUser = Socialite::driver('instagram')->user();
+        try {
+            $instagramUser = Socialite::driver('instagram')->user();
+        } catch(\Laravel\Socialite\Two\InvalidStateException  $e) {
+            return redirect('/');
+        } catch(RequestException  $e) {
+            return redirect('/');
+        } catch (Exception $e) {
+            return redirect('/');
+        }
+
 
         $user = User::find($instagramUser->id);
         if (!$user) {

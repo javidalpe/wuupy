@@ -39,7 +39,7 @@
               <form class="" action="{{route('subscriptions.destroy', $celebrity->pivot->id)}}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <input type="submit" name="" value="Dejar de seguir" class="ui button tiny">
+                <input type="submit" name="" value="Unfollow" class="ui button tiny">
               </form>
           </td>
         </tr>

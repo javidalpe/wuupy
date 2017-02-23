@@ -23,7 +23,8 @@ class MonetizeController extends Controller
       }
       $data = [
         'user' => $user,
-        'account' => $account
+        'account' => $account,
+        'ready' => $account && $account['transfers_enabled'],
       ];
       return view('monetize.index', $data);
   }
