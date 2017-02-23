@@ -41,18 +41,18 @@ class LoginController extends Controller
         $user = User::find($instagramUser->id);
         if (!$user) {
             $user = new User;
-            $user->id = $instagramUser->id;
-            $user->token = $instagramUser->token;
-            $user->refreshToken = $instagramUser->refreshToken;
-            $user->expiresIn = $instagramUser->expiresIn;
-            $user->nickname = $instagramUser->nickname;
-            $user->name = $instagramUser->name;
-            $user->email = $instagramUser->email;
-            $user->avatar = $instagramUser->avatar;
-            $user->user = $instagramUser->user;
-            $user->save();
-
         }
+
+        $user->id = $instagramUser->id;
+        $user->token = $instagramUser->token;
+        $user->refreshToken = $instagramUser->refreshToken;
+        $user->expiresIn = $instagramUser->expiresIn;
+        $user->nickname = $instagramUser->nickname;
+        $user->name = $instagramUser->name;
+        $user->email = $instagramUser->email;
+        $user->avatar = $instagramUser->avatar;
+        $user->user = $instagramUser->user;
+        $user->save();
 
         Auth::login($user, true);
 

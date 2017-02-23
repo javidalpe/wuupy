@@ -18,6 +18,15 @@
     @endif
     <div class="ui segment">
         @include('monetize.account')
+
+        @if(count($transfers) > 0)
+        <strong>Next transfers</strong>
+
+        <div class="ui segments">
+            @include('monetize.followers')
+        </div>
+        @endif
+        
     </div>
 
     <strong>3. Set your Instagram account private</strong>
@@ -47,4 +56,6 @@
     <div class="ui segments">
         @include('monetize.followers')
     </div>
+
+
 @endsection
