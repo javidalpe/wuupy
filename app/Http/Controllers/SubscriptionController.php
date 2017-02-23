@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
+use \GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -44,10 +45,14 @@ class SubscriptionController extends Controller
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         $account = \Stripe\Account::retrieve($user->account_id);
+        $following = Auth::user()->following()->find($user->id);
+        $isPublic = !InstagramController::isAccountPrivate($user);
 
         $data = [
             'user' => $user,
             'account' => $account,
+            'following' => $following,
+            'public' => $isPublic,
         ];
 
         return view('subscription.create', $data);
@@ -67,8 +72,13 @@ class SubscriptionController extends Controller
 
         $follower = Auth::user();
 
+        if ($follower->id == $celebrity->id) return back()->with('error', "Wtf?! You can't follow yourself!");
+
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         try {
+
+            InstagramController::follow($follower, $celebrity);
+
             if (!$follower->customer_id) {
                 $customer = \Stripe\Customer::create(array(
                     "description" => $follower->nickname,
@@ -113,9 +123,12 @@ class SubscriptionController extends Controller
 
             return redirect('https://www.instagram.com/' . $nickname . '/');
 
-
         } catch (\Stripe\Error\Base $e) {
+            InstagramController::unfollow($follower, $celebrity);
             return back()->with('error', $e->getMessage());
+        } catch(RequestException  $e) {
+
+            return back()->with('error', "There was an error following " . $nickname . ". Are you already following " . $nickname . "?");
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -192,6 +205,8 @@ class SubscriptionController extends Controller
         if (!$subscription) return back()->with('error', 'Account not found.');
 
         $celebrity = User::find($subscription->following_id);
+
+        InstagramController::unfollow(Auth::user(), $celebrity);
 
         if (!$celebrity) {
           $subscription->delete();

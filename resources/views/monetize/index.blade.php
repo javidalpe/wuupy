@@ -2,57 +2,60 @@
 
 @section('content')
 
-  <strong>1. Select your monthly following cost</strong>
-  <small>Users will pay this monthly subscription in order to follow you.</small>
-  <div class="ui segment">
-    @include('monetize.plan')
-  </div>
+    <strong id="1">1. Select your monthly following cost</strong>
+    <small>Users will pay this monthly subscription in order to follow you.</small>
+    @if($user->plan)
+        @include('master.components.done')
+    @endif
+    <div class="ui segment">
+        @include('monetize.plan')
+    </div>
 
-  <strong>2. Setup your bank account</strong>
-  <small>Where you will recieve funds</small>
-  <div class="ui segment">
-    @include('monetize.account')
-  </div>
+    <strong id="2">2. Setup your bank account</strong>
+    <small>Where you will recieve funds</small>
+    @if($account && $account['transfers_enabled'])
+        @include('master.components.done')
+    @endif
+    <div class="ui segment">
+        @include('monetize.account')
 
-  <strong>3. Set your Instagram account private</strong>
-  <small>This prevents from free followers.</small>
-  <div class="ui segment">
-    <img src="/img/private.jpg" alt="" style="max-height:60px">
-  </div>
+        @if(count($transfers) > 0)
+        <strong>Next transfers</strong>
 
-  <strong>4. Share your subscriber link</strong>
-  <small>This link allow people to pay and follow you.</small>
-  <div class="ui segment">
-    <div class="field">
-
-      <div class="ui action input">
-        <input type="text" value="{{ config('app.url') }}/{{ Auth::user()->nickname }}">
-        <button class="ui teal right labeled icon button">
-          <i class="copy icon"></i>
-          Copy
-        </button>
-      </div>
+        <div class="ui segments">
+            @include('monetize.followers')
+        </div>
+        @endif
 
     </div>
-  </div>
 
-  <strong>5. That's all!</strong>
-  <small>Sit and relax.</small>
-  <div class="ui segment">
-    We will manage your followers for you.
-  </div>
+    <strong id="3">3. Set your Instagram account private</strong>
+    <small>This prevents from free followers.</small>
+    @if($user->private_checked)
+        @include('master.components.done')
+    @endif
+    <div class="ui segment">
+        @include('monetize.private')
+    </div>
+
+    <strong id="4">4. Share your subscriber link</strong>
+    <small>This link allow people to pay and follow you.</small>
+    <div class="ui segment">
+        @include('monetize.copy')
+    </div>
+
+    <strong id="5">5. That's all!</strong>
+    <small>Sit and relax.</small>
+    <div class="ui segment">
+        We will manage your followers for you.
+    </div>
 
 
-  <strong>Current subscribers</strong>
-  <div class="ui segments raised">
-    @forelse ($user->followers()->get() as $follower)
-      <div class="ui segment">
-        {{ $follower->nickname }} ${{ config('plans.'. $follower->pivot->plan)/100 }}/month {{ $follower->pivot->created_at }}
-      </div>
-    @empty
-      <div class="ui segment">
-        0 subscribers
-      </div>
-    @endforelse
-  </div>
+    <strong>Current followers</strong>
+
+    <div class="ui segments">
+        @include('monetize.followers')
+    </div>
+
+
 @endsection

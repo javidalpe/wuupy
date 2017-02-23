@@ -85,7 +85,7 @@
 
 
                 <div style="text-align:center; margin-top:40px" class="ui grey">
-                    <small>Copyright Wuupy 2017</small>
+                    <small>Copyright {{ config('app.name')}} 2017</small>
                 </div>
             </div>
         </div>

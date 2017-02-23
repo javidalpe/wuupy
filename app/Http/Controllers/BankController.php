@@ -48,7 +48,7 @@ class BankController extends Controller
           $account = \Stripe\Account::retrieve(Auth::user()->account_id);
           $account->external_accounts->create(array("external_account" => $request->input('stripeToken')));
 
-          return redirect('/home');
+          return redirect('/home#3');
 
       } catch (\Stripe\Error\Base $e) {
           return back()->with('error', $e->getMessage());

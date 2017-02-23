@@ -7,24 +7,43 @@ use Auth;
 
 class MonetizeController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-      $user = Auth::user();
-      $account = null;
-      if ($user->account_id) {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function index()
+    {
+        $user = Auth::user();
 
-        $account = \Stripe\Account::retrieve($user->account_id);
-      }
-      $data = [
-        'user' => $user,
-        'account' => $account
-      ];
-      return view('monetize.index', $data);
-  }
+        //Account
+        $account = null;
+        $transfers = [];
+        if ($user->account_id) {
+            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+
+            try {
+                $account = \Stripe\Account::retrieve($user->account_id);
+                $transfers = \Stripe\Transfer::all(array(), array("stripe_account" => $user->account_id))->data;
+            } catch (\Stripe\Error\Base $e) {
+
+                $user->account_id = null;
+                $user->save();
+
+                return back()->with('error', $e->getMessage());
+            } catch (Exception $e) {
+                return back()->with('error', $e->getMessage());
+            }
+        }
+
+
+        $data = [
+            'user' => $user,
+            'account' => $account,
+            'transfers' => $transfers,
+        ];
+
+        return view('monetize.index', $data);
+    }
 }

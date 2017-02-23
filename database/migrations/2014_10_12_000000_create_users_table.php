@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('plan')->nullable();
             $table->string('account_id')->nullable();
             $table->string('customer_id')->nullable();
+            $table->boolean('private_checked')->default(false);
             $table->timestamps();
         });
     }

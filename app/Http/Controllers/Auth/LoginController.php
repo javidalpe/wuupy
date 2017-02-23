@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use \GuzzleHttp\Exception\RequestException;
 use Socialite;
 use App\User;
 use Auth;
@@ -16,7 +17,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('instagram')->redirect();
+        return Socialite::driver('instagram')->scopes(['public_content', 'relationships'])->redirect();
     }
 
     /**
@@ -26,23 +27,32 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $instagramUser = Socialite::driver('instagram')->user();
+        try {
+            $instagramUser = Socialite::driver('instagram')->user();
+        } catch(\Laravel\Socialite\Two\InvalidStateException  $e) {
+            return redirect('/');
+        } catch(RequestException  $e) {
+            return redirect('/');
+        } catch (Exception $e) {
+            return redirect('/');
+        }
+
 
         $user = User::find($instagramUser->id);
         if (!$user) {
             $user = new User;
-            $user->id = $instagramUser->id;
-            $user->token = $instagramUser->token;
-            $user->refreshToken = $instagramUser->refreshToken;
-            $user->expiresIn = $instagramUser->expiresIn;
-            $user->nickname = $instagramUser->nickname;
-            $user->name = $instagramUser->name;
-            $user->email = $instagramUser->email;
-            $user->avatar = $instagramUser->avatar;
-            $user->user = $instagramUser->user;
-            $user->save();
-
         }
+
+        $user->id = $instagramUser->id;
+        $user->token = $instagramUser->token;
+        $user->refreshToken = $instagramUser->refreshToken;
+        $user->expiresIn = $instagramUser->expiresIn;
+        $user->nickname = $instagramUser->nickname;
+        $user->name = $instagramUser->name;
+        $user->email = $instagramUser->email;
+        $user->avatar = $instagramUser->avatar;
+        $user->user = $instagramUser->user;
+        $user->save();
 
         Auth::login($user, true);
 
