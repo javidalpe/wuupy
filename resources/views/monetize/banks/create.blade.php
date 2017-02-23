@@ -65,7 +65,7 @@
 
         <div class="two fields">
             <div class="account-number-field-view field form-row account_number required">
-                <label for="account_number" class="default-label">Account number:</label>
+                <label for="account_number" class="default-label">Account number: <small><a href="javascript:$('.ui.modal').modal('show')">Help</a></small></label>
                 <div class="account-number-widget-view account_number">
                     <input class="field account-number" type="text" name="account_number" autocomplete="off" placeholder="" maxlength="34">
 
@@ -94,7 +94,7 @@
 
         <div class="routing-number-field-view field form-row routing_number required">
             <div class="routing-number-widget-view routing_number">
-                <label for="routing_number" class="default-label">Routing number:</label>
+                <label for="routing_number" class="default-label">Routing number: <small><a href="javascript:$('.ui.modal').modal('show')">Help</a></small></label>
                 <div >
                     <small>Banks in some countries—the United States, Canada, and Australia—also require a Routing Number to identify the specific bank account.</small>
                 </div>
@@ -176,3 +176,20 @@
         }
     }
     </script>
+
+
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Account numbers and Routing numbers
+        </div>
+        <div class="content">
+            @include('monetize.banks.help')
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                Ok, that's right!
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
