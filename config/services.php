@@ -39,6 +39,7 @@ return [
         'client_id' => env('INSTAGRAM_KEY'),
         'client_secret' => env('INSTAGRAM_SECRET'),
         'redirect' => env('INSTAGRAM_REDIRECT_URI'),
+        'api_url' => env('INSTAGRAM_API_URL', 'https://api.instagram.com/v1')
     ],
 
 ];

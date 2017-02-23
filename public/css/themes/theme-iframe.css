@@ -1,0 +1,32 @@
+body {
+    min-width: 232px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+h1 {
+    margin: 5px auto;
+}
+h3 {
+    font-size: 1.28rem;
+    margin: 0px 0px 20px 0px;
+}
+a.ui.button {
+	display: block;
+    margin-bottom: 12px;
+}
+.ui.input input{
+	text-align: center;
+}
+.ui.input input:-webkit-autofill{
+	-webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+::-webkit-input-placeholder {text-align: center;}
+:-moz-placeholder {/* Firefox 18- */text-align: center;}
+::-moz-placeholder {/* Firefox 19+ */text-align: center;}
+:-ms-input-placeholder {text-align: center;}
+
+textarea {
+    width: 200px;
+}
