@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -32,7 +33,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        if ($this->shouldReport($e)) {
+        if ($this->shouldReport($e) && App::environment('production')) {
             app('sentry')->captureException($e);
         }
         parent::report($e);
