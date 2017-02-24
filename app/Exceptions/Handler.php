@@ -32,10 +32,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($this->shouldReport($e) && App::environment('production')) {
-            app('sentry')->captureException($e);
+        if ($this->shouldReport($exception) && App::environment('production')) {
+            app('sentry')->captureException($exception);
         }
-        parent::report($e);
+        parent::report($exception);
     }
 
     /**

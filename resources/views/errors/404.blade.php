@@ -36,33 +36,6 @@
         font-weight: normal;
     }
 
-    .ui.vertical.stripe {
-        padding: 8em 0em;
-    }
-    .ui.vertical.stripe h3 {
-        font-size: 2em;
-    }
-    .ui.vertical.stripe .button + h3,
-    .ui.vertical.stripe p + h3 {
-        margin-top: 3em;
-    }
-    .ui.vertical.stripe .floated.image {
-        clear: both;
-    }
-    .ui.vertical.stripe p {
-        font-size: 1.33em;
-    }
-    .ui.vertical.stripe .horizontal.divider {
-        margin: 3em 0em;
-    }
-
-    .quote.stripe.segment {
-        padding: 0em;
-    }
-    .quote.stripe.segment .grid .column {
-        padding-top: 5em;
-        padding-bottom: 5em;
-    }
 
     .footer.segment {
         padding: 5em 0em;
@@ -120,32 +93,16 @@
             <div style="">
                 <div class="ui text container">
                     <h1 class="ui inverted header">
-                        Monetize your Instagram account
+                        Oops!
                     </h1>
-                    <h2>Turn your account into premium.</h2>
-                    <a href="/register" class="ui white huge inverted button">Get Started <i class="right arrow icon"></i></a>
+                    <h2>We can't seem to find the page you're looking for.</h2>
+                    <p>Error code: 404</p>
+                    <a href="/home" class="ui inverted button white">Home</a>
                 </div>
             </div>
 
         </div>
 
-
-        <div class="ui vertical stripe quote segment">
-            <div class="ui equal width stackable internally celled grid">
-                <div class="center aligned row">
-                    <div class="column">
-                        <h3>"What a Company"</h3>
-                        <p>That is what they all say about us</p>
-                    </div>
-                    <div class="column">
-                        <h3>"I shouldn't have gone with their competitor."</h3>
-                        <p>
-                            <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="ui inverted vertical footer segment">
             <div class="ui container">
