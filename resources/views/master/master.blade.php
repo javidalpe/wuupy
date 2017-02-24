@@ -2,7 +2,7 @@
 <html>
   <head>
     @include('master.metas')
-    <title>Fast Findirect</title>
+    <title>{{ config('app.name') }}</title>
     @include('master.header')
   </head>
   <body style="background-color:#f5f5f5;">
