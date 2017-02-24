@@ -25,7 +25,7 @@
             </div>
         </div>
         @if (!$following && !$public)
-            @if($user->plan)
+            @if($user->plan && $user->account_id)
                 @if(Auth::check())
                     @if(Auth::user()->customer_id)
                         <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST" class="ui bottom attached button primary">
