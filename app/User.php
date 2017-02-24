@@ -9,14 +9,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'user' => 'array',
-    ];
 
     public function followers()
     {

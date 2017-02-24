@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('avatar');
-            $table->json('user');
+            $table->string('user');
             $table->string('plan')->nullable();
             $table->string('account_id')->nullable();
             $table->string('customer_id')->nullable();

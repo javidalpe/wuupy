@@ -51,7 +51,7 @@ class LoginController extends Controller
         $user->name = $instagramUser->name;
         $user->email = $instagramUser->email;
         $user->avatar = $instagramUser->avatar;
-        $user->user = $instagramUser->user;
+        $user->user = json_encode($instagramUser->user);
         $user->save();
 
         Auth::login($user, true);
