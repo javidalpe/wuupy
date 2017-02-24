@@ -52,7 +52,6 @@
     <p><em>Bank code:</em> 012 (3 characters)
         <em>Branch code</em>: 4567 (4 characters, with 1 optional check digit)</p>
 
-        <p><em>Note:</em> For managed accounts, you’ll need to join bank code and branch code to create the full routing number. It should follow the pattern bank code + branch code, or ‘012-4567’ per above example.</p>
         <h5 id="account-number">
             Account number
             <a href="#account-number" class="anchor"></a>
@@ -71,7 +70,6 @@
         <p><em>Transit number:</em> 02345<br>
             <em>Institution number:</em> 987</p>
 
-            <p><em>Note:</em> For managed accounts, you’ll need to join transit and institution numbers to create the proper ACH routing number. It should follow pattern transit number + institution number, or ‘02345987’ per above example.</p>
             <h5 id="account-number">
                 Account number
                 <a href="#account-number" class="anchor"></a>
@@ -142,7 +140,6 @@
             <p><em>Clearing code:</em> 123 (3 characters)
                 <em>Branch code</em>: 456 (3 characters)</p>
 
-                <p><em>Note:</em> For managed accounts, you’ll need to join bank code and branch code to create the full routing number. It should follow the pattern clearing code + branch code, or ‘123-456’ per above example.</p>
                 <h5 id="account-number">
                     Account number
                     <a href="#account-number" class="anchor"></a>
@@ -183,7 +180,6 @@
                     <li><em>Branch code</em>: 567 (3 characters)</li>
                 </ul>
 
-                <p><em>Note:</em> For managed accounts, you’ll need to join bank code and branch code to create the full routing number. It should follow the pattern bank code + branch code (‘0123567’ per the above example).</p>
                 <h5 id="account-number">
                     Account number
                     <a href="#account-number" class="anchor"></a>
@@ -257,7 +253,6 @@
 
                 <p><em>Bank code:</em> 0123 <em>Branch code</em>: 567</p>
 
-                <p><em>Note:</em> For managed accounts, you’ll need to join bank code and branch code to create the full routing number. It should follow the pattern bank code + branch code, or ‘0123-567’ per above example.</p>
                 <h5 id="account-number">
                     Account number
                     <a href="#account-number" class="anchor"></a>

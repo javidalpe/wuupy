@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="five wide field required">
+        <div class="seven wide field required">
             <label>Where are you based?</label>
             <small>Where the account representative lives or the business is legally established.</small>
             <select name="country" class="ui search dropdown">

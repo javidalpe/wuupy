@@ -32,7 +32,7 @@ class InstagramController extends Controller
     {
         $lastUser = User::where('id', '<>', $user->id)->first();
 
-        if (!$lastUser) return false;
+        if (!$lastUser) return true;
 
         return !InstagramController::userIsVisibleFrom($lastUser, $user);
     }

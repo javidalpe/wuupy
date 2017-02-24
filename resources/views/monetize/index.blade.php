@@ -3,7 +3,7 @@
 @section('content')
 
     <strong id="1">1. Select your monthly following cost</strong>
-    <small>Users will pay this monthly subscription in order to follow you.</small>
+    <small>Users will pay this monthly subscription in order to follow you. You can change it at any time.</small>
     @if($user->plan)
         @include('master.components.done')
     @endif
@@ -29,7 +29,7 @@
 
     </div>
 
-    <strong id="3">3. Set your Instagram account private</strong>
+    <strong id="3">3. Go to Instagram and set your account private</strong>
     <small>This prevents from free followers.</small>
     @if($user->private_checked)
         @include('master.components.done')
