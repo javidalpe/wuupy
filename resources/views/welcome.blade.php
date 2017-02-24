@@ -83,10 +83,7 @@
                     @endif
                 </div>
 
-
-                <div style="text-align:center; margin-top:40px" class="ui grey">
-                    <small>Copyright {{ config('app.name')}} 2017</small>
-                </div>
+                @include('master.footer')
             </div>
         </div>
     </body>
