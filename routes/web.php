@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/account', 'AccountController@update')->name('account.update');
     Route::resource('banks', 'BankController');
     Route::post('/check', 'InstagramController@check')->name('instagram.check');
+    Route::get('/balance', 'BalanceController@index')->name('balance.index');
 
     //Follow
     Route::get('/follow', 'SubscriptionController@index')->name('subscriptions.index');

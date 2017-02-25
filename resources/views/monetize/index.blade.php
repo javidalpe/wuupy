@@ -22,6 +22,9 @@
         @if(count($balance) > 0)
           <strong>Account balance</strong>
           @include('monetize.balance.table')
+          @if(count($balance) == 3)
+            <a href="{{ route('balance.index')}}">Show more</a>
+          @endif
         @endif
 
     </div>
