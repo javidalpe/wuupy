@@ -18,15 +18,6 @@
     @endif
     <div class="ui segment">
         @include('monetize.account')
-
-        @if(count($balance) > 0)
-          <strong>Account balance</strong>
-          @include('monetize.balance.table')
-          @if(count($balance) == 3)
-            <a href="{{ route('balance.index')}}">Show more</a>
-          @endif
-        @endif
-
     </div>
 
     <strong id="3">3. Go to Instagram and set your account private</strong>

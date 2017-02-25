@@ -127,6 +127,24 @@
     </form>
 
 
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Account numbers and Routing numbers
+        </div>
+        <div class="content">
+            @include('monetize.banks.help')
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                Ok, that's right!
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+
 
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
@@ -176,20 +194,4 @@
         }
     }
     </script>
-
-
-    <div class="ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-            Account numbers and Routing numbers
-        </div>
-        <div class="content">
-            @include('monetize.banks.help')
-        </div>
-        <div class="actions">
-            <div class="ui positive right labeled icon button">
-                Ok, that's right!
-                <i class="checkmark icon"></i>
-            </div>
-        </div>
-    </div>
+    @endpush

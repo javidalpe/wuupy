@@ -19,7 +19,7 @@ class MonetizeController extends Controller
 
         //Account
         $account = null;
-        $transfers = [];
+        $balance = [];
         if ($user->account_id) {
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 

@@ -143,11 +143,11 @@ class SubscriptionController extends Controller
     */
     public function show($nickname)
     {
-        if(Auth::check()) return redirect()->route('subscriptions.create', $nickname);
-
         $user = User::where('nickname', $nickname)->first();
 
         if (!$user) abort(404);
+
+        if(Auth::check()) return redirect()->route('subscriptions.create', $nickname);
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 

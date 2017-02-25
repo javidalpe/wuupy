@@ -96,3 +96,9 @@
         </div>
 
     </form>
+
+    @push('scripts')
+      <script type="text/javascript">
+        $('.ui.accordion').accordion();
+      </script>
+    @endpush

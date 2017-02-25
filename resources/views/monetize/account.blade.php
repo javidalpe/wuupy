@@ -8,26 +8,18 @@
             @include('monetize.account.transfers-disabled')
         @endif
 
-        @foreach($account['external_accounts']['data'] as $bank)
-            <div class="ui horizontal segments">
-                <div class="ui segment">
-                    <p>{{ strtoupper($bank['currency']) }}</p>
-                </div>
-                <div class="ui segment">
-                    <p><i class="university icon"></i> {{ $bank['bank_name']}} ({{$bank['country']}})</p>
-                </div>
-                <div class="ui segment">
-                    <p>**** {{ $bank['last4']}}</p>
-                </div>
-            </div>
-        @endforeach
-
         @if(count($account['verification']['fields_needed']) > 0)
-            <div class="ui warning message">
-                <p>We weren't able to verify this account using the information
-                    already provided. If this account continues to process more volume, we may need to collect more information.</p>
-                <a href="{{route('account.edit')}}" class="button tiny blue">Provide more information</a>
-            </div>
+            @include('monetize.account.verification-needed')
         @endif
+
+        @include('monetize.banks.index')
+
+        @if(count($balance) > 0)
+          @include('monetize.balance.table')
+          @if(count($balance) == 3)
+            <a href="{{ route('balance.index')}}">Show more</a>
+          @endif
+        @endif
+        
     @endif
 @endif

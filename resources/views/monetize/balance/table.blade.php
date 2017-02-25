@@ -1,4 +1,4 @@
-
+<strong>Account balance</strong>
 <table class="ui table compact">
   <thead>
     <tr>

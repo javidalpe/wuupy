@@ -36,6 +36,9 @@
     </div>
 </form>
 
+@push('scripts')
+
+
 <script type="text/javascript">
 
 var amounts = {
@@ -53,3 +56,5 @@ $(document).ready(function() {
 });
 
 </script>
+
+@endpush
