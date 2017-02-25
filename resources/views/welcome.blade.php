@@ -154,7 +154,7 @@
                         <h4 class="ui inverted header">About</h4>
                         <div class="ui inverted link list">
                             <a href="/terms" class="item">Terms and Conditions</a>
-                            <a href="#" class="item">Contact Us</a>
+                            <a href="mailto:info@premy.co" class="item">Contact Us</a>
                         </div>
                     </div>
                     <div class="seven wide column">

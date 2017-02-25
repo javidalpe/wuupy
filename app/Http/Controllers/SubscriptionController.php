@@ -152,12 +152,17 @@ class SubscriptionController extends Controller
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         try {
-            $account = \Stripe\Account::retrieve($user->account_id);
 
-            $data = [
-                'user' => $user,
-                'account' => $account,
-            ];
+          $account = \Stripe\Account::retrieve($user->account_id);
+          $following = [];
+          $isPublic = !InstagramController::isAccountPrivate($user);
+
+          $data = [
+              'user' => $user,
+              'account' => $account,
+              'following' => $following,
+              'public' => $isPublic,
+          ];
 
             return view('subscription.show', $data);
 

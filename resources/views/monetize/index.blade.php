@@ -19,12 +19,9 @@
     <div class="ui segment">
         @include('monetize.account')
 
-        @if(count($transfers) > 0)
-        <strong>Next transfers</strong>
-
-        <div class="ui segments">
-            @include('monetize.followers')
-        </div>
+        @if(count($balance) > 0)
+          <strong>Account balance</strong>
+          @include('monetize.balance.table')
         @endif
 
     </div>

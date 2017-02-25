@@ -16,6 +16,7 @@ class MonetizeController extends Controller
     {
         $user = Auth::user();
 
+
         //Account
         $account = null;
         $transfers = [];
@@ -25,7 +26,7 @@ class MonetizeController extends Controller
 
             try {
                 $account = \Stripe\Account::retrieve($user->account_id);
-                $transfers = \Stripe\Transfer::all(array(), array("stripe_account" => $user->account_id))->data;
+                $balance = \Stripe\BalanceTransaction::all(array("limit" => 3), array("stripe_account" => $user->account_id))->data;
             } catch (\Stripe\Error\Base $e) {
 
                 $user->account_id = null;
@@ -41,7 +42,7 @@ class MonetizeController extends Controller
         $data = [
             'user' => $user,
             'account' => $account,
-            'transfers' => $transfers,
+            'balance' => $balance,
         ];
 
         return view('monetize.index', $data);
