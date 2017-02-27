@@ -79,7 +79,7 @@ class SubscriptionController extends Controller
 
             InstagramController::follow($follower, $celebrity);
 
-            if (!$follower->customer_id) {
+            /*if (!$follower->customer_id) {
                 $customer = \Stripe\Customer::create(array(
                     "description" => $follower->nickname,
                     "email" => $request->input('stripeEmail'),
@@ -109,19 +109,19 @@ class SubscriptionController extends Controller
                 "customer" => $customer->id,
                 "plan" => $celebrity->plan,
                 "application_fee_percent" => config('plans.application_fee_percent'),
-            ), array("stripe_account" => $celebrity->account_id));
+            ), array("stripe_account" => $celebrity->account_id));*/
 
             $sub = new Subscription;
             $sub->follower_id = $follower->id;
             $sub->following_id = $celebrity->id;
 
-            $sub->customer_id = $customer->id;
-            $sub->subscription_id = $subscription->id;
+            $sub->customer_id = '56456456';
+            $sub->subscription_id = '456456456';
             $sub->plan = $celebrity->plan;
             $sub->application_fee_percent = config('plans.application_fee_percent');
             $sub->save();
 
-            return redirect('https://www.instagram.com/' . $nickname . '/');
+            return back()->with('positive', 'Now you have access to estelasailing.');
 
         } catch (\Stripe\Error\Base $e) {
             InstagramController::unfollow($follower, $celebrity);

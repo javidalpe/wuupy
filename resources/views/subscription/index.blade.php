@@ -12,7 +12,7 @@
     <table class="ui table unstackable">
       <thead>
         <tr><th>Account</th>
-        <th>Following cost</th>
+        <th>Challenge accepted</th>
         <th>Since</th>
         <th>Actions</th>
       </tr></thead>
@@ -30,17 +30,13 @@
             </div>
           </h4></td>
           <td>
-              ${{ config('plans.'. $celebrity->pivot->plan)/100 }}/month
+              Tweet about <a class="ui label">#estelasailing</a></label>
           </td>
           <td>
               {{ $celebrity->pivot->created_at }}
           </td>
           <td>
-              <form class="" action="{{route('subscriptions.destroy', $celebrity->pivot->id)}}" method="post">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <input type="submit" name="" value="Unfollow" class="ui button tiny">
-              </form>
+
           </td>
         </tr>
       @endforeach

@@ -20,17 +20,12 @@
         </div>
       </h4></td>
       <td>
-          ${{ config('plans.'. $follower->pivot->plan)/100 }}/month
+          Tweet about <a class="ui label">#estelasailing</a></label>
       </td>
       <td>
           {{ $follower->pivot->created_at }}
       </td>
       <td>
-          <form class="" action="{{route('subscriptions.destroy', $follower->pivot->id)}}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <input type="submit" name="" value="Block" class="ui button tiny">
-          </form>
       </td>
     </tr>
   @endforeach

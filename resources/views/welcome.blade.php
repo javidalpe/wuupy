@@ -120,7 +120,7 @@
             <div style="">
                 <div class="ui text container">
                     <h1 class="ui inverted header">
-                        Monetize your Instagram account
+                        Manage your Private Account
                     </h1>
                     <h2>Turn your account into premium.</h2>
                     <a href="/register" class="ui white huge inverted button">Get Started <i class="right arrow icon"></i></a>

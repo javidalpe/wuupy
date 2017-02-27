@@ -37,27 +37,16 @@
               </form>
             @else
               <div class="extra content">
-                <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
-                  {{ csrf_field() }}
-                  <script
-                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="{{ config('services.stripe.key') }}"
-                  data-amount="{{config('plans.' . $user->plan)}}"
-                  data-name="Follow {{ $user->nickname }}"
-                  data-description="Monthly subscription"
-                  data-email="{{ $user->email }}"
-                  data-image="{{ $user->avatar }}"
-                  data-locale="auto"
-                  data-zip-code="false"
-                  data-label="@include('subscription.follow')"
-                  data-allow-remember-me="false">
-                  </script>
+                  <form action="{{ route('subscriptions.store', $user->nickname)}}" method="POST" class="">
+                    {{ csrf_field() }}
+                <a href="https://twitter.com/intent/tweet?button_hashtag=estelastreaming" class="twitter-hashtag-button" data-related="eStelaStreaming">Tweet #estelastreaming</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <input type="submit" name="" value="">
                 </form>
               </div>
             @endif
           @else
             <a class="ui bottom attached button primary"
-              href="{{ route('subscriptions.create', $user->nickname)}}">@include('subscription.follow')</a>
+              href="{{ route('subscriptions.create', $user->nickname)}}">Accept the challenge to get access</a>
           @endif
         @else
           <div class="extra content">
@@ -68,8 +57,5 @@
         <a href="https://instagram.com/{{$user->nickname}}" class="ui bottom attached button">Go to profile</a>
       @endif
     </div>
-  </div>
-  <div style="margin-top:60px;text-align:center;">
-    <a href="/" style="color:grey">Monetize your own account...</a>
   </div>
 @endsection
