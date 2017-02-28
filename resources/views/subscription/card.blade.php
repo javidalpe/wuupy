@@ -58,6 +58,7 @@
                             image: '{{ $user->avatar }}',
                             locale: 'auto',
                             token: function(token) {
+                                $('#customButton').addClass("loading"Ç);
                                 $('#token').val(token.id);
                                 $('form')[0].submit();
                             }
