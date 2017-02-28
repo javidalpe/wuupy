@@ -28,6 +28,46 @@ class InstagramController extends Controller
         return redirect("/home#3");
     }
 
+
+    public static function getUserUserId($celebrity, $nickname)
+    {
+        $response = self::get('/users/search', $celebrity->token, '&q=' . $nickname);
+
+        if (count($response["data"]) <= 0) return false;
+
+        return $response["data"][0]["id"];
+    }
+
+    public static function isFollower($follower_id, $celebrity)
+    {
+        $response = self::get('/users/self/followed-by', $celebrity->token);
+
+        if (count($response["data"]) <= 0) return false;
+
+        for ($i=0; $i < count($response["data"]); $i++) {
+            if($response["data"][$i]["id"] == $follower_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function hasRequested($follower_id, $celebrity)
+    {
+        $response = self::get('/users/self/requested-by', $celebrity->token);
+
+        if (count($response["data"]) <= 0) return false;
+
+        for ($i=0; $i < count($response["data"]); $i++) {
+            if($response["data"][$i]["id"] == $follower_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function isAccountPrivate($user)
     {
         $lastUser = User::where('id', '<>', $user->id)->first();
@@ -39,11 +79,9 @@ class InstagramController extends Controller
 
     public static function userIsVisibleFrom($follower, $celebrity)
     {
-        $url = config('services.instagram.api_url') . '/users/' . $celebrity->id . '/media/recent/?access_token=' . $follower->token;
         try {
-            $client = new \GuzzleHttp\Client();
-            $res = $client->get($url);
-            return true;
+            $url = '/users/' . $celebrity->id . '/media/recent/';
+            return self::get($url, $follower->token);
         } catch(RequestException  $e) {
             return false;
         } catch(Exception $e) {
@@ -51,23 +89,34 @@ class InstagramController extends Controller
         }
     }
 
-    public static function follow($follower, $celebrity)
+    public static function approve($celebrity, $follower_id)
     {
         $client = new \GuzzleHttp\Client();
-        $res = $client->post(config('services.instagram.api_url') . '/users/' . $celebrity->id . '/relationship/?access_token=' . $follower->token, ['form_params' => [
-            'action' => self::ACTION_FOLLOW
-        ]]);
-        $res = $client->post(config('services.instagram.api_url') . '/users/' . $follower->id . '/relationship/?access_token=' . $celebrity->token, ['form_params' => [
+
+        $res = $client->post(config('services.instagram.api_url') . '/users/' . $follower_id . '/relationship/?access_token=' . $celebrity->token, ['form_params' => [
             'action' => self::ACTION_APPROVE
         ]]);
-
     }
 
-    public static function unfollow($follower, $celebrity)
+    public static function unfollow($celebrity, $follower_id)
     {
         $client = new \GuzzleHttp\Client();
-        $res = $client->post(config('services.instagram.api_url') . '/users/' . $celebrity->id . '/relationship/?access_token=' . $follower->token, ['form_params' => [
-            'action' => self::ACTION_UNFOLLOW
+        $res = $client->post(config('services.instagram.api_url') . '/users/' . $follower_id . '/relationship/?access_token=' . $celebrity->token, ['form_params' => [
+            'action' => self::ACTION_IGNORE
         ]]);
+    }
+
+    public static function get($url, $token, $query = false)
+    {
+        $url = config('services.instagram.api_url') . $url . '?access_token=' . $token;
+        if($query) {
+            $url = $url . $query;
+        }
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get($url);
+
+        $data = json_decode($response->getBody(), true);
+        return $data;
     }
 }

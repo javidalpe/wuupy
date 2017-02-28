@@ -31,7 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Follow
     Route::get('/follow', 'SubscriptionController@index')->name('subscriptions.index');
     Route::delete('/follow/{id}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
-    Route::post('/follow/{nickname}', 'SubscriptionController@store')->name('subscriptions.store');
 
     //logout
     Route::post('/logout', function () { Auth::logout(); return redirect('/'); });
@@ -43,5 +42,5 @@ Route::get('/register', 'Auth\LoginController@redirectToProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 //Subscriptions
-Route::get('/follow/{nickname}', 'SubscriptionController@create')->name('subscriptions.create');
+Route::post('/follow/{nickname}', 'SubscriptionController@store')->name('subscriptions.store');
 Route::get('/{nickname}', 'SubscriptionController@show')->name('subscriptions.show');

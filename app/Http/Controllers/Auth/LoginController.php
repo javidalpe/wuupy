@@ -17,7 +17,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('instagram')->scopes(['public_content', 'relationships'])->redirect();
+        return Socialite::driver('instagram')->scopes(['public_content', 'relationships', 'follower_list'])->redirect();
     }
 
     /**
@@ -55,10 +55,6 @@ class LoginController extends Controller
         $user->save();
 
         Auth::login($user, true);
-
-        if (session('follow')) {
-          return redirect()->route('subscriptions.create', session('follow'));
-        }
 
         return redirect('/home');
     }

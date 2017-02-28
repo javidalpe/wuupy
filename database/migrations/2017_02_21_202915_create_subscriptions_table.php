@@ -20,13 +20,15 @@ class CreateSubscriptionsTable extends Migration
             $table->index('follower_id');
             $table->bigInteger('following_id');
             $table->index('following_id');
-            
+
             $table->index(['follower_id', 'following_id']);
 
             $table->string('customer_id');
             $table->string('subscription_id');
             $table->string('plan');
             $table->string('application_fee_percent');
+
+            $table->string('status');
 
             $table->timestamps();
         });
