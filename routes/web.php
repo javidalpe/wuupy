@@ -42,6 +42,6 @@ Route::get('/register', 'Auth\LoginController@redirectToProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 //Subscriptions
+Route::get('/done', 'SubscriptionController@done')->name('subscriptions.done');
 Route::post('/{nickname}', 'SubscriptionController@store')->name('subscriptions.store');
 Route::get('/{nickname}', 'SubscriptionController@show')->name('subscriptions.show');
-Route::get('/{nickname}/done', 'SubscriptionController@done')->name('subscriptions.done');

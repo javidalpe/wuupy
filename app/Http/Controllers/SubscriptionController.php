@@ -147,6 +147,8 @@ class SubscriptionController extends Controller
             $sub->status = self::STATUS_PENDING_ACTIVE;
             $sub->save();
 
+            $request->session()->put('username', $username);
+
             if (InstagramController::hasRequested($follower_id, $celebrity))
             {
                 InstagramController::approve($celebrity, $follower_id);
@@ -174,17 +176,9 @@ class SubscriptionController extends Controller
     * @param  \App\Subscription  $subscription
     * @return \Illuminate\Http\Response
     */
-    public function done($nickname)
+    public function done()
     {
-        $user = User::where('nickname', $nickname)->first();
-
-        if (!$user) abort(404);
-
-        $data = [
-            'user' => $user
-        ];
-
-        return view('subscription.done', $data);
+        return view('subscription.done');
     }
 
     /**
