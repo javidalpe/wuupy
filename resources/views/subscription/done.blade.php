@@ -7,7 +7,7 @@
         </div>
 
               <div class="ui stacked segment">
-                <p>estelasaling - Accepting your follow request.<button class="ui basic loading button"></button></p>
+                <p>estelasaling - Aproving your follow request.<button class="ui basic loading button"></button></p>
               </div>
     </div>
     <div style="margin-top:60px;text-align:center;">
