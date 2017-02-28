@@ -97,7 +97,7 @@
                     </h1>
                     <h2>Whoops, looks like something went wrong!</h2>
                     <p>Error code: 500</p>
-                    <a href="/home" class="ui inverted button white">Home</a>
+                    <a href="/" class="ui inverted button white">Home</a>
                 </div>
             </div>
 

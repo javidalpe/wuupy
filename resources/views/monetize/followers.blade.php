@@ -11,22 +11,21 @@
     <tr>
       <td>
         <h4 class="ui image header">
-          <img src="{{$follower->avatar}}" class="ui mini rounded image">
           <div class="content">
-            <a href="https://instagram.com/{{$follower->nickname}}">{{$follower->nickname}}</a>
+            <a href="https://instagram.com/{{$follower->username}}">{{$follower->username}}</a>
             <div class="sub header">
-              {{$follower->name}}
+              {{$follower->username}}
           </div>
         </div>
       </h4></td>
       <td>
-          ${{ config('plans.'. $follower->pivot->plan)/100 }}/month
+          @plan($follower->plan)
       </td>
       <td>
-          {{ $follower->pivot->created_at }}
+          {{ $follower->created_at }}
       </td>
       <td>
-          <form class="" action="{{route('subscriptions.destroy', $follower->pivot->id)}}" method="post">
+          <form class="" action="{{route('subscriptions.destroy', $follower->id)}}" method="post">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <input type="submit" name="" value="Block" class="ui button tiny">

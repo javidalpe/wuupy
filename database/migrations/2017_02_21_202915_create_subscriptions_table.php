@@ -18,6 +18,7 @@ class CreateSubscriptionsTable extends Migration
 
             $table->bigInteger('follower_id');
             $table->index('follower_id');
+            $table->string('follower_username');
             $table->bigInteger('following_id');
             $table->index('following_id');
 

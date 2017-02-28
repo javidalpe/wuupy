@@ -136,6 +136,7 @@ class SubscriptionController extends Controller
             if(!$sub) {
                 $sub = new Subscription;
                 $sub->follower_id = $follower_id;
+                $sub->username = $username;
                 $sub->following_id = $celebrity->id;
             }
 

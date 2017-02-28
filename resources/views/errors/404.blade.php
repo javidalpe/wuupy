@@ -97,7 +97,7 @@
                     </h1>
                     <h2>We can't seem to find the page you're looking for.</h2>
                     <p>Error code: 404</p>
-                    <a href="/home" class="ui inverted button white">Home</a>
+                    <a href="/" class="ui inverted button white">Home</a>
                 </div>
             </div>
 

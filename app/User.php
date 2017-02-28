@@ -12,14 +12,7 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->belongsToMany('App\User', 'subscriptions', 'following_id', 'follower_id')
-          ->withTimestamps()->withPivot(['plan', 'id']);
-    }
-
-    public function following()
-    {
-        return $this->belongsToMany('App\User', 'subscriptions', 'follower_id', 'following_id')
-          ->withTimestamps()->withPivot(['plan', 'id']);
+        return $this->hasMany('App\Subscription', 'following_id', 'id');
     }
 
 }

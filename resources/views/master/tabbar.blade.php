@@ -5,9 +5,7 @@
                 <img class="ui mini circular image" src="{{ Auth::user()->avatar }}">
             </div>
             <a  href="/home" class="item">{{ Auth::user()->nickname }}</a>
-            @if (Auth::user()->following()->count() > 0)
-              <a  href="/follow" class="item">Following</a>
-            @endif
+
             <div class="right menu">
                 <div class="item">
                     <form action="/logout" class="ui form" method="post">

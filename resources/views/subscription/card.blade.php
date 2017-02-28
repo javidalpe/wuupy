@@ -58,13 +58,14 @@
                             image: '{{ $user->avatar }}',
                             locale: 'auto',
                             token: function(token) {
-                                $('#customButton').addClass("loading"Ç);
+                                $('#customButton').addClass("loading");
                                 $('#token').val(token.id);
                                 $('form')[0].submit();
                             }
                         });
 
                         document.getElementById('customButton').addEventListener('click', function(e) {
+                            $('#customButton').addClass("loading");
                             // Open Checkout with further options:
                             handler.open({
                                 name: 'Follow {{ $user->nickname }}',
