@@ -180,6 +180,9 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
+        //Web scrapping
+        Laravel\Dusk\DuskServiceProvider::class,
+
     ],
 
     /*
