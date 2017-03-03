@@ -16,13 +16,24 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('https://instagram.com');
-            $browser->clickLink('Log in');
+            $browser->visit('/accounts/login/')
+		->waitForText('Log in')	
+            	->type('username', 'javidalpe')
+                ->type('password', 'ij825675pm')
+                ->press('Log in');
+	
+		$browser->pause(1000);
+		
+		$browser->visit('/accounts/activity/')
+			->assertPathIs('/accounts/activity/')
+			->waitForLink('Follow Requests')
+			->clickLink('Follow Requests')
+			->assertSee('j.carlos_life');
 
-            $browser->type('username', 'javidalpe')
-                    ->type('password', 'ij825675pm')
-                    ->press('Log in')
-                    ->assertPathIs('https://www.instagram.com/');
+				
+		$text = $browser->text('a._4zhc5.notranslate._gpve0');
+		if($text=='estelasailing')
+			$browser->press('Approve');
         });
     }
 }
