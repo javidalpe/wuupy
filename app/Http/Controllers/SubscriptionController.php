@@ -36,10 +36,10 @@ class SubscriptionController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request, $nickname)
+    public function store(Request $request, $username)
     {
         //Celebrity exits
-        $celebrity = User::where('nickname', $nickname)->first();
+        $celebrity = User::where('username', $username)->first();
         if (!$celebrity) abort(404);
 
         //Missed tokens
@@ -61,7 +61,7 @@ class SubscriptionController extends Controller
 
             //Get from logged user
             $follower = Auth::user();
-            $username = $follower->nickname;
+            $username = $follower->username;
             $follower_id = $follower->id;
         }
 
@@ -84,7 +84,7 @@ class SubscriptionController extends Controller
                 InstagramController::approve($celebrity, $follower_id);
                 $sub->status = self::STATUS_ACTIVE;
                 $sub->save();
-                return redirect()->route('subscriptions.done', $nickname)->with('positive', 'You are now following ' . $celebrity->name . '.');
+                return redirect()->route('subscriptions.done', $username)->with('positive', 'You are now following ' . $celebrity->name . '.');
             } else if($sub->status == self::STATUS_PENDING_ACTIVE) {
                 return back()->with('error', 'You are already ready to follow ' . $celebrity->name . '.');
             }
@@ -155,16 +155,16 @@ class SubscriptionController extends Controller
                 $sub->status = self::STATUS_ACTIVE;
                 $sub->save();
 
-                return redirect('https://www.instagram.com/' . $nickname . '/');
+                return redirect('https://www.instagram.com/' . $username . '/');
             } else {
-                return redirect()->route('subscriptions.done', $nickname)->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
+                return redirect()->route('subscriptions.done', $username)->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
             }
 
         } catch (\Stripe\Error\Base $e) {
             //InstagramController::unfollow($follower, $celebrity);
             return back()->with('error', $e->getMessage());
         } catch(RequestException  $e) {
-            return back()->with('error', "There was an error following " . $nickname . ". Are you already following " . $nickname . "?");
+            return back()->with('error', "There was an error following " . $username . ". Are you already following " . $username . "?");
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -187,9 +187,9 @@ class SubscriptionController extends Controller
     * @param  \App\Subscription  $subscription
     * @return \Illuminate\Http\Response
     */
-    public function show($nickname)
+    public function show($username)
     {
-        $user = User::where('nickname', $nickname)->first();
+        $user = User::where('username', $username)->first();
 
         if (!$user) abort(404);
 

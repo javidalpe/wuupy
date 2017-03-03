@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
 
             //Instagram
-            $table->string('nickname')->nullable();
+            $table->string('username')->nullable();
             $table->string('pass')->nullable();
             $table->boolean('private_checked')->default(false);
 
@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
             //Future purchases
             $table->string('customer_id')->nullable();
 
-            
+
             $table->timestamps();
         });
     }

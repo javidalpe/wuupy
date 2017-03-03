@@ -19,7 +19,7 @@
                 {{$user->name}}
             </div>
             <div class="meta">
-                {{$user->nickname}}
+                {{$user->username}}
             </div>
             <div class="meta">
                 Follwing cost: @plan($user->plan)
@@ -29,7 +29,7 @@
         @if (!$following && !$public)
             @if($user->plan && $user->account_id)
                 <div class="extra content">
-                    <form class="ui form" action="{{ route('subscriptions.store', $user->nickname)}}" method="POST">
+                    <form class="ui form" action="{{ route('subscriptions.store', $user->username)}}" method="POST">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="stripeToken" value="" id="token">
@@ -68,7 +68,7 @@
                             $('#customButton').addClass("loading");
                             // Open Checkout with further options:
                             handler.open({
-                                name: 'Follow {{ $user->nickname }}',
+                                name: 'Follow {{ $user->username }}',
                                 description: 'Monthly subscription',
                                 zipCode: false,
                                 amount: {{config('plans.' . $user->plan)}}
@@ -86,11 +86,11 @@
                 </div>
             @else
                 <div class="extra content">
-                    <div>Following {{ $user->nickname }} is not available</div>
+                    <div>Following {{ $user->username }} is not available</div>
                 </div>
             @endif
         @else
-            <a href="https://instagram.com/{{$user->nickname}}" class="ui bottom attached button">Go to profile</a>
+            <a href="https://instagram.com/{{$user->username}}" class="ui bottom attached button">Go to profile</a>
         @endif
     </div>
     <div style="margin-top:60px;text-align:center;">

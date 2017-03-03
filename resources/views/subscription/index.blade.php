@@ -23,7 +23,7 @@
             <h4 class="ui image header">
               <img src="{{$celebrity->avatar}}" class="ui mini rounded image">
               <div class="content">
-                <a href="https://instagram.com/{{$celebrity->nickname}}">{{$celebrity->nickname}}</a>
+                <a href="https://instagram.com/{{$celebrity->username}}">{{$celebrity->username}}</a>
                 <div class="sub header">
                   {{$celebrity->name}}
               </div>

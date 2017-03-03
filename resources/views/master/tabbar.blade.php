@@ -4,7 +4,7 @@
             <div class="item">
                 <img class="ui mini circular image" src="{{ Auth::user()->avatar }}">
             </div>
-            <a  href="/home" class="item">{{ Auth::user()->nickname }}</a>
+            <a  href="/home" class="item">{{ Auth::user()->username }}</a>
 
             <div class="right menu">
                 <div class="item">

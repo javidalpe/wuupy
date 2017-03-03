@@ -20,12 +20,23 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Monetize
     Route::get('/home', 'MonetizeController@index')->name('home');
+
+    //Connect Instagram Account
+    Route::post('/connect', 'InstagramController@connect')->name('instagram.connect');
+
+    //Plan
     Route::post('/plan', 'PlanController@store')->name('plan.store');
+
+    //Account, banks & verification
     Route::post('/account', 'AccountController@store')->name('account.store');
-    Route::get('/verify', 'AccountController@edit')->name('account.edit');
     Route::put('/account', 'AccountController@update')->name('account.update');
     Route::resource('banks', 'BankController');
+    Route::get('/verify', 'AccountController@edit')->name('account.edit');
+
+    //Privacy check
     Route::post('/check', 'InstagramController@check')->name('instagram.check');
+
+    //Check your balance
     Route::get('/balance', 'BalanceController@index')->name('balance.index');
 
     //Follow
