@@ -32,9 +32,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/follow', 'SubscriptionController@index')->name('subscriptions.index');
     Route::delete('/follow/{id}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
 
-    //logout
-    Route::post('/logout', function () { Auth::logout(); return redirect('/'); });
 });
+
+
+Auth::routes();
 
 //Subscriptions
 Route::get('/done', 'SubscriptionController@done')->name('subscriptions.done');
