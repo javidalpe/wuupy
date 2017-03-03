@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             //Instagram
             $table->string('username')->nullable();
             $table->string('pass')->nullable();
+            $table->string('status')->nullable();
             $table->boolean('private_checked')->default(false);
 
             //Pricing

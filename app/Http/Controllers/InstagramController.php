@@ -24,6 +24,12 @@ class InstagramController extends Controller
         return redirect("/home#3");
     }
 
+
+    public static function accountExists($username)
+    {
+        return true;
+    }
+
     public static function isAccountPrivate($user)
     {
         return true;

@@ -40,22 +40,24 @@ class SubscriptionController extends Controller
     {
         //Celebrity exits
         $celebrity = User::where('username', $username)->first();
+
         if (!$celebrity) abort(404);
 
         //Missed tokens
         if (!$request->has('stripeToken')) back()->with('error', 'Payment failed.');
 
+        $follower_id = null;
         if (Auth::guest())
         {
             //Guest user, get from username
             $username = $request->input('username');
+
             if (!$username) {
                 return back()->with('error', 'Who are you?! The username is required.');
             }
-            $follower_id = InstagramController::getUserUserId($celebrity, $username);
-            if (!$follower_id) {
-                return back()->with('error', 'Instagram username not found.');
-            }
+
+            if (!InstagramController::accountExists($request->input('username')))
+                return back()->with('error', "Selected account doesn't exists.");
 
         } else {
 
@@ -76,7 +78,7 @@ class SubscriptionController extends Controller
         }*/
 
         //Subscription already exists
-        $sub = Subscription::where('follower_id', '=', $follower_id)->where('following_id', '=', $celebrity->id)->first();
+        $sub = Subscription::where('follower_username', '=', $username)->where('following_id', '=', $celebrity->id)->first();
         /*if ($sub) {
 
             if (InstagramController::hasRequested($follower_id, $celebrity)) {
@@ -135,8 +137,7 @@ class SubscriptionController extends Controller
 
             if(!$sub) {
                 $sub = new Subscription;
-                $sub->follower_id = $follower_id;
-                $sub->username = $username;
+                $sub->follower_username = $username;
                 $sub->following_id = $celebrity->id;
             }
 
@@ -149,16 +150,7 @@ class SubscriptionController extends Controller
 
             $request->session()->put('username', $username);
 
-            /*if (InstagramController::hasRequested($follower_id, $celebrity))
-            {
-                InstagramController::approve($celebrity, $follower_id);
-                $sub->status = self::STATUS_ACTIVE;
-                $sub->save();
-
-                return redirect('https://www.instagram.com/' . $username . '/');
-            } else {*/
-                return redirect()->route('subscriptions.done', $username)->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
-            //}
+            return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
 
         } catch (\Stripe\Error\Base $e) {
             //InstagramController::unfollow($follower, $celebrity);
@@ -178,7 +170,11 @@ class SubscriptionController extends Controller
     */
     public function done()
     {
-        return view('subscription.done');
+        $pending = Subscription::where('follower_username', '=', session('username'))
+            ->where('status', '=', self::STATUS_PENDING_ACTIVE)
+            ->get();
+
+        return view('subscription.done', ['pending' => $pending]);
     }
 
     /**

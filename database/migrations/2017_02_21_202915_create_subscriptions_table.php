@@ -14,15 +14,14 @@ class CreateSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
 
-            $table->bigInteger('follower_id');
-            $table->index('follower_id');
             $table->string('follower_username');
-            $table->bigInteger('following_id');
+            $table->index('follower_username');
+            $table->integer('following_id');
             $table->index('following_id');
 
-            $table->index(['follower_id', 'following_id']);
+            $table->index(['follower_username', 'following_id']);
 
             $table->string('customer_id');
             $table->string('subscription_id');
