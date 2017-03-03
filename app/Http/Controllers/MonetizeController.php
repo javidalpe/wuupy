@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Tests\Browser\ExampleTest;
 
 class MonetizeController extends Controller
 {
@@ -16,6 +17,10 @@ class MonetizeController extends Controller
     {
         $user = Auth::user();
 
+        //ExampleTest::prepare();
+        $test = new ExampleTest();
+        //$test->driver();
+        $test->testBasicExample();
 
         //Account
         $account = null;

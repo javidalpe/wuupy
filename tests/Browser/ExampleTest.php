@@ -17,20 +17,20 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/accounts/login/')
-		->waitForText('Log in')	
+		->waitForText('Log in')
             	->type('username', 'javidalpe')
                 ->type('password', 'ij825675pm')
                 ->press('Log in');
-	
+
 		$browser->pause(1000);
-		
+
 		$browser->visit('/accounts/activity/')
 			->assertPathIs('/accounts/activity/')
 			->waitForLink('Follow Requests')
 			->clickLink('Follow Requests')
 			->assertSee('j.carlos_life');
 
-				
+
 		$text = $browser->text('a._4zhc5.notranslate._gpve0');
 		if($text=='estelasailing')
 			$browser->press('Approve');
