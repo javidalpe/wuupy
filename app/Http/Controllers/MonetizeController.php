@@ -17,9 +17,9 @@ class MonetizeController extends Controller
     {
         $user = Auth::user();
 
-        //ExampleTest::prepare();
+        ExampleTest::prepare();
         $test = new ExampleTest();
-        //$test->driver();
+        $test->driver();
         $test->testBasicExample();
 
         //Account
