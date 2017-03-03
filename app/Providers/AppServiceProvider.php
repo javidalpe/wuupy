@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Blade;
 use Laravel\Dusk\DuskServiceProvider;
+use Laravel\Dusk\Browser;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
       Blade::directive('date', function ($epoch) {
           return '<?php $dt=new DateTime("@' . $epoch . '");echo($dt->format("Y-m-d")); ?>';
       });
+
+      Browser::$storeScreenshotsAt = storage_path() . '/logs/';
+      Browser::$storeConsoleLogAt = storage_path() . '/logs/';
 
     }
 

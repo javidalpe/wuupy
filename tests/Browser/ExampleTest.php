@@ -16,15 +16,16 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/accounts/login/')
-		->waitForText('Log in')
+            $browser->visit('https://www.instagram.com/accounts/login/')
+    			->assertPathIs('/accounts/login/')
+		        ->waitForText('Log in')
             	->type('username', 'javidalpe')
                 ->type('password', 'ij825675pm')
                 ->press('Log in');
 
-		$browser->pause(1000);
+		$browser->pause(2000);
 
-		$browser->visit('/accounts/activity/')
+		$browser->visit('https://www.instagram.com/accounts/activity/')
 			->assertPathIs('/accounts/activity/')
 			->waitForLink('Follow Requests')
 			->clickLink('Follow Requests')
