@@ -71,13 +71,13 @@ class SubscriptionController extends Controller
         }
 
         //Already following
-        if (InstagramController::isFollower($follower_id, $celebrity)) {
+        /*if (InstagramController::isFollower($follower_id, $celebrity)) {
             return back()->with('error', 'You are already following ' . $celebrity->name . '.');
-        }
+        }*/
 
         //Subscription already exists
         $sub = Subscription::where('follower_id', '=', $follower_id)->where('following_id', '=', $celebrity->id)->first();
-        if ($sub) {
+        /*if ($sub) {
 
             if (InstagramController::hasRequested($follower_id, $celebrity)) {
                 //Follow if requested
@@ -88,7 +88,7 @@ class SubscriptionController extends Controller
             } else if($sub->status == self::STATUS_PENDING_ACTIVE) {
                 return back()->with('error', 'You are already ready to follow ' . $celebrity->name . '.');
             }
-        }
+        }*/
 
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -149,16 +149,16 @@ class SubscriptionController extends Controller
 
             $request->session()->put('username', $username);
 
-            if (InstagramController::hasRequested($follower_id, $celebrity))
+            /*if (InstagramController::hasRequested($follower_id, $celebrity))
             {
                 InstagramController::approve($celebrity, $follower_id);
                 $sub->status = self::STATUS_ACTIVE;
                 $sub->save();
 
                 return redirect('https://www.instagram.com/' . $username . '/');
-            } else {
+            } else {*/
                 return redirect()->route('subscriptions.done', $username)->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
-            }
+            //}
 
         } catch (\Stripe\Error\Base $e) {
             //InstagramController::unfollow($follower, $celebrity);
@@ -255,7 +255,7 @@ class SubscriptionController extends Controller
 
         $celebrity = User::find($subscription->following_id);
 
-        InstagramController::unfollow(Auth::user(), $celebrity);
+        //InstagramController::unfollow(Auth::user(), $celebrity);
 
         if (!$celebrity) {
             $subscription->delete();
@@ -265,10 +265,10 @@ class SubscriptionController extends Controller
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         $sub = \Stripe\Subscription::retrieve($subscription->subscription_id
-        , array("stripe_account" => $celebrity->account_id));;
+            , array("stripe_account" => $celebrity->account_id));;
         $sub->cancel();
 
-        $subscription->delete();
+        //$subscription->delete();
 
         return back()->with('positive', 'Following cancelled.');
 
