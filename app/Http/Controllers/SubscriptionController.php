@@ -7,6 +7,7 @@ use \GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use App\Jobs\ApproveRequests;
 
 class SubscriptionController extends Controller
 {
@@ -149,6 +150,8 @@ class SubscriptionController extends Controller
             $sub->save();
 
             $request->session()->put('username', $username);
+
+            dispatch(new ApproveRequests($celebrity));
 
             return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
 

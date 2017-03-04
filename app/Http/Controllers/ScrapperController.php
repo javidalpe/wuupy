@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use App\Subscription;
 
 class ScrapperController extends DuskTestCase
 {
@@ -75,10 +76,11 @@ class ScrapperController extends DuskTestCase
     }
 
 
-    public function follow($nickname, $password, $nicknames)
+    public function follow($followingId, $nickname, $password, $nicknames)
     {
+
         try {
-            $this->browse(function (Browser $browser) use($nickname, $password, $nicknames) {
+            $this->browse(function (Browser $browser) use($followingId, $nickname, $password, $nicknames) {
 
                 $this->login($browser, $nickname, $password)
                     ->visit(self::BASE . '/accounts/activity/')
@@ -90,19 +92,22 @@ class ScrapperController extends DuskTestCase
 
                 for ($i=2; $i < 100; $i++) {
                     try {
-                        $browser->with('._mkiio:nth-child(' . $i . ')', function ($li) use($nicknames, $processed) {
-                            
-                            $text = $li->text('._gpve0');
+                        $browser->with('._mkiio:nth-child(' . $i . ')', function ($li) use($followingId, $nicknames, $processed) {
+
+                            $text = trim($li->text('._gpve0'));
 
                             if (!in_array($text, $processed)) {
                                 if(in_array($text, $nicknames)) {
+                                    Subscription::where('following_id', '=', $followingId)
+                                        ->where('follower_username', '=', $text)
+                                        ->update(['status' => SubscriptionController::STATUS_ACTIVE]);
                     			     $li->press('Approve');
                                  } else {
                      			     $li->press('Hide');
                                  }
                              }
 
-                             array_push($processed, $text);
+                             array_unshift($processed, $text);
 
                          });
                      } catch(\Facebook\WebDriver\Exception\NoSuchElementException $exc) {
@@ -116,6 +121,5 @@ class ScrapperController extends DuskTestCase
         } finally {
            self::closeAll();
         }
-
     }
 }

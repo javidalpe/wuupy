@@ -3,7 +3,7 @@
 @section('content')
     <div class="ui segments">
         <div class="ui segment">
-            <h2>1 pending subscription</h2>
+            <h2>{{count($pending)}} pending subscriptions</h2>
         </div>
         @foreach ($pending as $key => $value)
             <div class="ui stacked segment">

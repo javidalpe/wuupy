@@ -1,10 +1,10 @@
 @if (Auth::check())
     <div class="ui top menu">
         <div class="ui container">
-            <div class="item">
-                <img class="ui mini circular image" src="{{ Auth::user()->avatar }}">
-            </div>
-            <a  href="/home" class="item">{{ Auth::user()->username }}</a>
+
+            @if (Auth::user()->username )
+                <a  href="/home" class="item">{{ Auth::user()->username }}</a>
+            @endif
 
             <div class="right menu">
                 <div class="item">
