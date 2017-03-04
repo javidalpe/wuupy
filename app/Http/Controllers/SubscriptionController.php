@@ -73,26 +73,7 @@ class SubscriptionController extends Controller
             return back()->with('error', 'You cannot follow yourself!');
         }
 
-        //Already following
-        /*if (InstagramController::isFollower($follower_id, $celebrity)) {
-            return back()->with('error', 'You are already following ' . $celebrity->name . '.');
-        }*/
-
-        //Subscription already exists
         $sub = Subscription::where('follower_username', '=', $username)->where('following_id', '=', $celebrity->id)->first();
-        /*if ($sub) {
-
-            if (InstagramController::hasRequested($follower_id, $celebrity)) {
-                //Follow if requested
-                InstagramController::approve($celebrity, $follower_id);
-                $sub->status = self::STATUS_ACTIVE;
-                $sub->save();
-                return redirect()->route('subscriptions.done', $username)->with('positive', 'You are now following ' . $celebrity->name . '.');
-            } else if($sub->status == self::STATUS_PENDING_ACTIVE) {
-                return back()->with('error', 'You are already ready to follow ' . $celebrity->name . '.');
-            }
-        }*/
-
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         try {
@@ -150,8 +131,6 @@ class SubscriptionController extends Controller
             $sub->save();
 
             $request->session()->put('username', $username);
-
-            dispatch(new ApproveRequests($celebrity));
 
             return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
 

@@ -8,6 +8,7 @@
         @foreach ($pending as $key => $value)
             <div class="ui stacked segment">
               <p>{{ $value->user->username }} - Approving your follow request.<button class="ui basic loading button" style="box-shadow: none;"></button></p>
+              <p><a href="https://www.instagram.com/{{$value->user->username}}">Go to {{$value->user->username}} profile</a></p>
             </div>
         @endforeach
     </div>

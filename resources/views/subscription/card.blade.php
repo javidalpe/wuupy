@@ -15,9 +15,6 @@
             @endif
 
             <div class="header" style="margin-top:10px;">
-                {{$user->name}}
-            </div>
-            <div class="meta">
                 {{$user->username}}
             </div>
             @if(!$public)
