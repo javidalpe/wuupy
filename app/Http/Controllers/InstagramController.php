@@ -14,7 +14,10 @@ class InstagramController extends Controller
     {
         $user = Auth::user();
 
-        $private = InstagramController::isAccountPrivate($user);
+        if(!$user->username)
+            return back()->with("error", "Connect your Instagram account first.");
+
+        $private = InstagramController::isAccountPrivate($user->username);
         $user->private_checked = $private;
         $user->save();
 
@@ -24,25 +27,33 @@ class InstagramController extends Controller
         return redirect("/home#3");
     }
 
-
-    public static function accountExists($username)
-    {
-        return true;
-    }
-
-    public static function isAccountPrivate($user)
-    {
-        return true;
-    }
-
     public function connect(Request $request)
     {
         $user = Auth::user();
+
+        $controller = new ScrapperController();
+
+        if(!$controller->checkAuth($request->input('username'), $request->input('pass')))
+            return back()->with("error", "Invalid credentials.");
 
         $user->username = $request->input('username');
         $user->pass = encrypt($request->input('pass'));
         $user->save();
 
         return back();
+
+    }
+
+
+    public static function accountExists($username)
+    {
+        $controller = new ScrapperController();
+        return $controller->profileExits($username);
+    }
+
+    public static function isAccountPrivate($username)
+    {
+        $controller = new ScrapperController();
+        return $controller->profilePrivate($username);
     }
 }

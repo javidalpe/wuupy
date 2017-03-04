@@ -195,7 +195,7 @@ class SubscriptionController extends Controller
 
             $account = \Stripe\Account::retrieve($user->account_id);
             $following = [];
-            $isPublic = !InstagramController::isAccountPrivate($user);
+            $isPublic = !InstagramController::isAccountPrivate($user->username);
 
             $data = [
                 'user' => $user,

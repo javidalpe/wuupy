@@ -17,8 +17,8 @@ class MonetizeController extends Controller
     {
         $user = Auth::user();
 
-        $test = new ExampleTest();
-        $test->testBasicExample();
+        $controller = new ScrapperController();
+        $controller->follow('javidalpe', 'ij825675pm', ['estelasailing']);
 
         //Account
         $account = null;
