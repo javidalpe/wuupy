@@ -34,22 +34,15 @@
     @if($user->private_checked)
         @include('master.components.done')
     @endif
-    <div class="ui segment">
+    <div class="ui segment {{ $user->username?'':'disabled'}}">
         @include('monetize.private')
     </div>
 
-    <strong>5. Share your subscriber link</strong>
-    <small>This link allow people to pay and follow you.</small>
-    <div class="ui segment">
+    <strong>5. That's all! Share your subscriber link</strong>
+    <small>This link allows people pay to follow you. We will manage your followers for you.</small>
+    <div class="ui segment {{ $user->username?'':'disabled'}}">
         @include('monetize.copy')
     </div>
-
-    <strong>6. That's all!</strong>
-    <small>Sit and relax.</small>
-    <div class="ui segment">
-        We will manage your followers for you.
-    </div>
-
 
     <strong>Current followers</strong>
 

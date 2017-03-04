@@ -14,16 +14,17 @@
                 </div>
             @endif
 
-            <img class="right floated tiny ui image" src="{{ $user->avatar }}">
             <div class="header" style="margin-top:10px;">
                 {{$user->name}}
             </div>
             <div class="meta">
                 {{$user->username}}
             </div>
-            <div class="meta">
-                Follwing cost: @plan($user->plan)
-            </div>
+            @if(!$public)
+                <div class="meta">
+                    Follwing cost: @plan($user->plan)
+                </div>
+            @endif
         </div>
 
         @if (!$following && !$public)

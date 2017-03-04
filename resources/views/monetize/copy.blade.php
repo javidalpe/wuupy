@@ -1,8 +1,8 @@
 <div class="field">
 
     <div class="ui action input">
-        <input id="foo" type="text" value="{{route('subscriptions.show', $user->username) }}">
-        <button class="ui blue right labeled icon button copy-button" data-clipboard-target="#foo">
+        <input id="foo" type="text" value="{{route('subscriptions.show', $user->username) }}" {{ $user->username?'':'disabled'}}>
+        <button class="ui blue right labeled icon button copy-button" data-clipboard-target="#foo" {{ $user->username?'':'disabled'}}>
             <i class="copy icon" data-content="Copied!"></i>
             Copy
         </button>

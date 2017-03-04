@@ -1,5 +1,4 @@
-<strong>Bank</strong>
-<table class="ui table celled">
+<table class="ui table compact celled">
   <tbody>
     @foreach($account['external_accounts']['data'] as $bank)
       <tr>
