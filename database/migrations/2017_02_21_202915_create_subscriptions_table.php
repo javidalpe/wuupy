@@ -24,6 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->index(['follower_username', 'following_id']);
 
             $table->string('customer_id');
+            $table->string('email');
             $table->string('subscription_id');
             $table->string('plan');
             $table->string('application_fee_percent');

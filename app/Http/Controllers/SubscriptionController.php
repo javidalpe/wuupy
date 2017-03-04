@@ -124,6 +124,7 @@ class SubscriptionController extends Controller
             }
 
             $sub->customer_id = $customer->id;
+            $sub->email = $email;
             $sub->subscription_id = $subscription->id;
             $sub->plan = $celebrity->plan;
             $sub->application_fee_percent = config('plans.application_fee_percent');
