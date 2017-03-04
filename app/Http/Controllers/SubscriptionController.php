@@ -11,11 +11,11 @@ use App\Jobs\ApproveRequests;
 
 class SubscriptionController extends Controller
 {
-
-    public const STATUS_PENDING_ACTIVE = "pending_active";
-    public const STATUS_ACTIVE = "active";
-    public const STATUS_PENDING_INACTIVE = "pending_inactive";
-    public const STATUS_INACTIVE  = "inactive";
+    
+    const STATUS_PENDING_ACTIVE = "pending_active";
+    const STATUS_ACTIVE = "active";
+    const STATUS_PENDING_INACTIVE = "pending_inactive";
+    const STATUS_INACTIVE  = "inactive";
 
     /**
     * Display a listing of the resource.
