@@ -31,6 +31,7 @@
                         {{ csrf_field() }}
 
                         <input type="hidden" name="stripeToken" value="" id="token">
+                        <input type="hidden" name="stripeEmail" value="" id="email">
 
                         @if(Auth::guest())
                             <div class="field">
@@ -58,6 +59,7 @@
                             token: function(token) {
                                 $('#customButton').addClass("loading");
                                 $('#token').val(token.id);
+                                $('#email').val(token.email);
                                 $('form')[0].submit();
                             }
                         });
