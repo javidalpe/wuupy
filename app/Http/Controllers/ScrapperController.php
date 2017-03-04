@@ -98,10 +98,10 @@ class ScrapperController extends DuskTestCase
 
                             if (!in_array($text, $processed)) {
                                 if(in_array($text, $nicknames)) {
-                                    Subscription::where('following_id', '=', $followingId)
-                                        ->where('follower_username', '=', $text)
-                                        ->update(['status' => SubscriptionController::STATUS_ACTIVE]);
                     			     $li->press('Approve');
+                                     Subscription::where('following_id', '=', $followingId)
+                                         ->where('follower_username', '=', $text)
+                                         ->update(['status' => SubscriptionController::STATUS_ACTIVE]);
                                  } else {
                      			     $li->press('Hide');
                                  }

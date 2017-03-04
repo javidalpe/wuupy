@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Tests\Browser\ExampleTest;
-use App\Jobs\ApproveRequests;
 
 class MonetizeController extends Controller
 {
@@ -17,7 +16,7 @@ class MonetizeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
+
         //Account
         $account = null;
         $balance = [];

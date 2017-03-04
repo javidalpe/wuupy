@@ -47,6 +47,8 @@ class ApproveRequests implements ShouldQueue
 
         $nicknames = array_flatten($nicknames->toArray());
 
+        if(count($nicknames) <= 0) return;
+
         $controller = new ScrapperController();
         $controller->follow($this->user->id, $this->user->username, decrypt($this->user->pass), $nicknames);
     }
