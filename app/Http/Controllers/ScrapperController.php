@@ -51,7 +51,7 @@ class ScrapperController extends DuskTestCase
             $this->browse(function (Browser $browser) use($nickname, $password) {
 
                 $this->login($browser, $nickname, $password);
-                $browser->screenshot('login');
+                $browser->screenshot('login-'. time() . '-' . $nickname);
 
                 try {
                     //Success login
