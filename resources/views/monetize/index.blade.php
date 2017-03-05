@@ -3,7 +3,7 @@
 @section('content')
 
     <strong>1. Connect your Instagram account</strong>
-    <small>Users will pay this monthly subscription in order to follow you. You can change it at any time.</small>
+    <small>We recommend you create a new Instagram account a leaves the main account free.</small>
     @if($user->username)
         @include('master.components.done')
     @endif
