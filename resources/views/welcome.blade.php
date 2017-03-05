@@ -130,7 +130,7 @@
         </div>
 
 
-        <div class="ui vertical stripe quote segment">
+        <!--<div class="ui vertical stripe quote segment">
             <div class="ui equal width stackable internally celled grid">
                 <div class="center aligned row">
                     <div class="column">
@@ -164,6 +164,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
 
 </body>
