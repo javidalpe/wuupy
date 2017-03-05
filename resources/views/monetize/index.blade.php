@@ -44,7 +44,7 @@
         @include('monetize.copy')
     </div>
 
-    <strong>Current followers</strong>
+    <strong>Monthly paying followers</strong>
 
     <div class="ui segments">
         @include('monetize.followers')

@@ -48,7 +48,7 @@ class InstagramController extends Controller
         } catch(InvalidUsernameException $e) {
             return back()->with("error", "The username you entered doesn't belong to an account. Please check your username and try again.");
         } catch(VerifyAccountException $e) {
-            return back()->with("error", "We've noticed some problems connecting with Instagram due to your security settings. Please check your Instagram account and try again.");
+            return back()->with("error", "We've noticed some problems connecting with Instagram due to your security settings. Please check your mobile Instagram account and try again.");
         }
     }
 
