@@ -19,7 +19,7 @@
                     {{ csrf_field() }}
                     <div class="field">
                         <label>Username</label>
-                        <input type="text" name="username" placeholder="Username">
+                        <input type="text" name="username" placeholder="Username"  autocorrect="off" autocapitalize="none">
                     </div>
                     <div class="field">
                         <label>Password</label>

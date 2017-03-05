@@ -46,7 +46,7 @@
   <div class="fields">
     <div class="four wide field required ">
       <label>First name</label>
-      <input type="text" name="first_name" required placeholder='First'>
+      <input type="text" name="first_name" required placeholder='First' value="{{$user->name}}">
     </div>
     <div class="four wide field required">
       <label>Last name</label>
