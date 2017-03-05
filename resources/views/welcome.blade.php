@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-
+-->
         <div class="ui inverted vertical footer segment">
             <div class="ui container">
                 <div class="ui stackable inverted divided equal height stackable grid">
@@ -164,9 +164,8 @@
                 </div>
             </div>
         </div>
-    -->
-    </div>
 
+    </div>
 </body>
 
 </html>
