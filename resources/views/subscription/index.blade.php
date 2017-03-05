@@ -20,15 +20,7 @@
         @foreach ($user->following()->get() as $celebrity)
         <tr>
           <td>
-            <h4 class="ui image header">
-              <img src="{{$celebrity->avatar}}" class="ui mini rounded image">
-              <div class="content">
-                <a href="https://instagram.com/{{$celebrity->username}}">{{$celebrity->username}}</a>
-                <div class="sub header">
-                  {{$celebrity->name}}
-              </div>
-            </div>
-          </h4></td>
+              <a href="https://instagram.com/{{$celebrity->username}}">{{$celebrity->username}}</a></td>
           <td>
               ${{ config('plans.'. $celebrity->pivot->plan)/100 }}/month
           </td>

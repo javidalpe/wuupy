@@ -54,7 +54,7 @@
                         <script>
                         var handler = StripeCheckout.configure({
                             key: '{{ config('services.stripe.key') }}',
-                            image: '{{ $user->avatar }}',
+                            image: '{{ config('app.url') }}\img\premy.jpg',
                             locale: 'auto',
                             token: function(token) {
                                 $('#customButton').addClass("loading");
@@ -71,7 +71,6 @@
                                 name: 'Follow {{ $user->username }}',
                                 description: 'Monthly subscription',
                                 zipCode: false,
-                                dataImage: '\img\premy.jpg',
                                 amount: {{config('plans.' . $user->plan)}}
                             });
                             e.preventDefault();
