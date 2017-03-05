@@ -71,6 +71,7 @@
                                 name: 'Follow {{ $user->username }}',
                                 description: 'Monthly subscription',
                                 zipCode: false,
+                                dataImage: '\img\premy.jpg',
                                 amount: {{config('plans.' . $user->plan)}}
                             });
                             e.preventDefault();
