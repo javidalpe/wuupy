@@ -1,4 +1,4 @@
-<table class="ui table">
+<table class="ui table compact unstackable">
     <thead>
         <tr>
             <th>Date</th>
