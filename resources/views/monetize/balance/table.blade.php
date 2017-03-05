@@ -1,5 +1,5 @@
 <strong>Account balance</strong>
-<table class="ui table compact">
+<table class="ui table compact celled unstackable">
   <thead>
     <tr>
       <th>Type</th>
