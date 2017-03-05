@@ -1,7 +1,12 @@
 @if($user->username)
     Connected as: {{$user->username}}
+    <form class="ui form" action="{{ route('instagram.disconnect') }}" method="post">
+        {{ csrf_field() }}
+        @include('master.components.submit',['class' => '', 'label' => 'Unlink'])
+    </form>
+
 @else
-    <a href="javascript:$('.ui.modal').modal('show');" class="ui button primary">Connect Instagram Account</a>
+    <a href="javascript:$('.ui.modal').modal('show');" class="ui button primary"><i class="linkify icon"></i> Log in with Instagram</a>
 
 
     <div class="ui modal">
@@ -20,7 +25,7 @@
                         <label>Password</label>
                         <input type="password" name="pass" placeholder="Password">
                     </div>
-                        @include('master.components.submit',['class' => 'primary', 'label' => 'Connect'])
+                        @include('master.components.submit',['class' => 'primary', 'label' => 'Log in'])
                 </form>
             </div>
         </div>

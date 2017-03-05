@@ -27,11 +27,25 @@ class InstagramController extends Controller
         return redirect("/home#3");
     }
 
+    public function disconnect(Request $request)
+    {
+        $user = Auth::user();
+        $user->username = null;
+        $user->pass = null;
+        $user->save();
+
+        return back();
+    }
+
     public function connect(Request $request)
     {
         $user = Auth::user();
 
         $controller = new ScrapperController();
+
+        if (filter_var($request->input('username'), FILTER_VALIDATE_EMAIL)) {
+            return back()->with("error", "The username you entered is an email. Please introduce your username.");
+        }
 
         try {
 

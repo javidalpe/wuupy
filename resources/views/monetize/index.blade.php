@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <strong>1. Connect your Instagram account</strong>
+    <strong>1. Link your Instagram account</strong>
     <small>We recommend you create a new Instagram account a leaves the main account free.</small>
     @if($user->username)
         @include('master.components.done')

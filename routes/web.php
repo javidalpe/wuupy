@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Connect Instagram Account
     Route::post('/connect', 'InstagramController@connect')->name('instagram.connect');
+    Route::post('/disconnect', 'InstagramController@disconnect')->name('instagram.disconnect');
 
     //Plan
     Route::post('/plan', 'PlanController@store')->name('plan.store');
