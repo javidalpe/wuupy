@@ -50,14 +50,35 @@ class ScrapperController extends DuskTestCase
         try {
             $this->browse(function (Browser $browser) use($nickname, $password) {
 
-                    $this->login($browser, $nickname, $password);
-                    $browser->screenshot('login');
-                    $browser->visit(self::BASE . '/accounts/activity/')
-            			->assertPathIs('/accounts/activity/');
+                $this->login($browser, $nickname, $password);
+                $browser->screenshot('login');
+
+                try {
+                    //Success login
+                    $browser->assertPathIs('/');
+
+                } catch(\PHPUnit_Framework_ExpectationFailedException $e) {
+                    try {
+                        //Incorrect password
+                        $browser->assertSee('password was incorrect');
+                        throw new InvalidPasswordException();
+
+                    } catch(\PHPUnit_Framework_ExpectationFailedException $e) {
+                        try {
+                            //Incorrect password
+                            $browser->assertSee('The username');
+                            throw new InvalidUsernameException();
+
+                        } catch(\PHPUnit_Framework_ExpectationFailedException $e) {
+                            //Incorrect username
+                            throw new InvalidPasswordException();
+                        }
+                    }
+                }
+                $browser->visit(self::BASE . '/accounts/activity/')
+        			->assertPathIs('/accounts/activity/');
 
             });
-        } catch(\PHPUnit_Framework_ExpectationFailedException $e) {
-            return false;
         } finally {
             self::closeAll();
         }
@@ -124,3 +145,6 @@ class ScrapperController extends DuskTestCase
         }
     }
 }
+
+class InvalidPasswordException extends \Exception {}
+class InvalidUsernameException extends \Exception {}

@@ -33,15 +33,21 @@ class InstagramController extends Controller
 
         $controller = new ScrapperController();
 
-        if(!$controller->checkAuth($request->input('username'), $request->input('pass')))
-            return back()->with("error", "Invalid credentials.");
+        try {
 
-        $user->username = $request->input('username');
-        $user->pass = encrypt($request->input('pass'));
-        $user->save();
+            $controller->checkAuth($request->input('username'), $request->input('pass'));
 
-        return back();
+            $user->username = $request->input('username');
+            $user->pass = encrypt($request->input('pass'));
+            $user->save();
 
+            return back();
+
+        } catch(InvalidPasswordException $e) {
+            return back()->with("error", "Sorry, your password was incorrect. Please double-check your password.");
+        } catch(InvalidUsernameException $e) {
+            return back()->with("error", "The username you entered doesn't belong to an account. Please check your username and try again.");
+        }
     }
 
 
