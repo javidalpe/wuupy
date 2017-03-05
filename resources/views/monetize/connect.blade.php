@@ -19,11 +19,11 @@
                     {{ csrf_field() }}
                     <div class="field">
                         <label>Username</label>
-                        <input type="text" name="username" placeholder="Username"  autocorrect="off" autocapitalize="none">
+                        <input type="text" name="username" placeholder="Username"  autocorrect="off" autocapitalize="none" required>
                     </div>
                     <div class="field">
                         <label>Password</label>
-                        <input type="password" name="pass" placeholder="Password">
+                        <input type="password" name="pass" placeholder="Password" required>
                     </div>
                         @include('master.components.submit',['class' => 'primary', 'label' => 'Log in'])
                 </form>

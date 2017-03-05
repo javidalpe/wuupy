@@ -36,7 +36,7 @@
                         @if(Auth::guest())
                             <div class="field">
                                 <label>Your Instagram username</label>
-                                <input type="text" name="username" placeholder="mynickname" required>
+                                <input type="text" name="username" placeholder="username" required autocorrect="off" autocapitalize="none">
                             </div>
                         @endif
                         <div class="field">

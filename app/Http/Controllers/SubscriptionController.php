@@ -133,7 +133,7 @@ class SubscriptionController extends Controller
 
             $request->session()->put('username', $username);
 
-            return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $username . '. The approval could take a few minutes.');
+            return redirect()->route('subscriptions.done');
 
         } catch (\Stripe\Error\Base $e) {
             //InstagramController::unfollow($follower, $celebrity);
