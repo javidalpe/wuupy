@@ -54,7 +54,7 @@
                         <script>
                         var handler = StripeCheckout.configure({
                             key: '{{ config('services.stripe.key') }}',
-                            image: '{{ config('app.url') }}\img\premy.jpg',
+                            image: '{{ config('app.url') }}/img/premy.jpg',
                             locale: 'auto',
                             token: function(token) {
                                 $('#customButton').addClass("loading");
