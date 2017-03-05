@@ -11,7 +11,7 @@ use App\Jobs\ApproveRequests;
 
 class SubscriptionController extends Controller
 {
-    
+
     const STATUS_PENDING_ACTIVE = "pending_active";
     const STATUS_ACTIVE = "active";
     const STATUS_PENDING_INACTIVE = "pending_inactive";
@@ -133,7 +133,7 @@ class SubscriptionController extends Controller
 
             $request->session()->put('username', $username);
 
-            return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $celebrity->name . '. The approval could take a few minutes.');
+            return redirect()->route('subscriptions.done')->with('positive', 'You can now follow ' . $username . '. The approval could take a few minutes.');
 
         } catch (\Stripe\Error\Base $e) {
             //InstagramController::unfollow($follower, $celebrity);

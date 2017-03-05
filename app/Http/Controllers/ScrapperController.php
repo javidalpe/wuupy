@@ -50,8 +50,9 @@ class ScrapperController extends DuskTestCase
         try {
             $this->browse(function (Browser $browser) use($nickname, $password) {
 
-                    $this->login($browser, $nickname, $password)
-                        ->visit(self::BASE . '/accounts/activity/')
+                    $this->login($browser, $nickname, $password);
+                    $browser->screenshot('login');
+                    $browser->visit(self::BASE . '/accounts/activity/')
             			->assertPathIs('/accounts/activity/');
 
             });
