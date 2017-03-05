@@ -71,12 +71,11 @@ class ScrapperController extends DuskTestCase
 
                         } catch(\PHPUnit_Framework_ExpectationFailedException $e) {
                             //Incorrect username
-                            throw new InvalidPasswordException();
+                            $browser->assertSee('Verify Your Account');
+                            throw new VerifyAccountException();
                         }
                     }
                 }
-                $browser->visit(self::BASE . '/accounts/activity/')
-        			->assertPathIs('/accounts/activity/');
 
             });
         } finally {
@@ -148,3 +147,4 @@ class ScrapperController extends DuskTestCase
 
 class InvalidPasswordException extends \Exception {}
 class InvalidUsernameException extends \Exception {}
+class VerifyAccountException extends \Exception {}
